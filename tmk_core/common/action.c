@@ -47,6 +47,10 @@ int retro_tapping_counter = 0;
 #    include <fauxclicky.h>
 #endif
 
+#if (BILATERAL_COMBINATIONS + 0)
+#    include "quantum.h"
+#endif
+
 #ifdef IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 __attribute__((weak)) bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) { return false; }
 #endif
