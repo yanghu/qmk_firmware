@@ -181,7 +181,7 @@ For instance, holding and releasing `LT(2, KC_SPACE)` without hitting another ke
 
 ## Bilateral Combinations
 
-The last mod-tap hold will be converted to the corresponding mod-tap tap if another key on the same hand is tapped during the hold.
+The last mod-tap hold will be converted to the corresponding mod-tap tap if another key on the same hand is tapped during the hold, unless a key on the other hand is tapped first.
 
 This option can be used to prevent accidental modifier combinations with mod-tap, in particular those caused by rollover on home row mods.  As only the last mod-tap hold is affected, it should be enabled after adjusting settings and typing style so that accidental mods happen only occasionally, e.g. with a long enough tapping term, ignore mod tap interrupt, and deliberately brief keypresses.
 
