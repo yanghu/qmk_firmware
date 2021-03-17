@@ -23,16 +23,20 @@ enum planck_layers {
     _NAV,
     _NUMPAD,
     _FUNC,
-    _DEBUG,
+    _DEBUG_LAYER,
     _PSCR,
     _ENC_SCROLL,
+};
+
+enum tap_dance_codes {
+    TD_SFT_CAPS,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_1x2uR(
       KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
       LCTL_T(KC_ESC), LCTL_T(KC_A), KC_S, KC_D, LT(_NUMPAD, KC_F), KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
-      KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, RSFT_T(KC_ENT),
+      TD(TD_SFT_CAPS), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, RSFT_T(KC_ENT),
       TO(_ENC_SCROLL), KC_LGUI, KC_LALT, MO(_NUMPAD), LT(_SYMBOL, KC_ENT), MO(_NAV), LSFT_T(KC_SPACE), KC_LEFT, KC_DOWN, KC_UP, LT(_PSCR, KC_RGHT)),
 
 	[_SYMBOL] = LAYOUT_planck_1x2uR(
@@ -54,12 +58,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
 	[_FUNC] = LAYOUT_planck_1x2uR(
-      KC_GRV, RESET, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSPC, TO(_DEBUG),
-      KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_MINS, KC_EQL, KC_LBRC, KC_TRNS, KC_BSLS, KC_TRNS,
+      KC_GRV, RESET, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, TO(_DEBUG_LAYER),
+      KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_MINS, KC_EQL, KC_LBRC, KC_TRNS, KC_BSLS, KC_TRNS,
       KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
 
-	[_DEBUG] = LAYOUT_planck_1x2uR(
+	[_DEBUG_LAYER] = LAYOUT_planck_1x2uR(
       KC_TRNS, RESET, DEBUG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, TO(_BASE),
       KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
       KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -146,7 +150,7 @@ const rgblight_segment_t PROGMEM base_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, 0
 const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_RED});
 const rgblight_segment_t PROGMEM nav_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
 const rgblight_segment_t PROGMEM numpad_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
-const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({4, 5, HSV_WHITE});
+const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({3, 4, HSV_WHITE});
 const rgblight_segment_t PROGMEM enc_scroll_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_YELLOW});
 
 // Now define the array of layers. Later layers take precedence
@@ -156,7 +160,7 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     nav_layer,
     enc_scroll_layer,
     capslock_layer,
-    adjust_layer,
+    adjust_layer
 );
 
 void keyboard_post_init_user(void) {
@@ -177,6 +181,12 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, _NUMPAD));
     rgblight_set_layer_state(2, layer_state_cmp(state, _NAV));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ENC_SCROLL));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG_LAYER));
     return state;
 }
+
+// Tap dance
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_SFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+};
