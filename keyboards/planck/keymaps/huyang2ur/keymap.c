@@ -30,68 +30,81 @@ enum planck_layers {
     _ENC_SCROLL,
 };
 
+#define HOME_A LCTL_T(KC_A)
+#define HOME_S LSFT_T(KC_S)
+#define HOME_F LT(_NUMPAD, KC_F)
+#define HOME_K LCTL_T(KC_K)
+
+#define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
+#define NUM_ALT LM(_NUMPAD, MOD_LALT)
+#define SFT_SPACE LSFT_T(KC_SPACE)
+#define SYM_ENT LT(_SYMBOL, KC_ENT)
+#define SYM_LEFT LT(_SYMBOL, KC_LEFT)
+
+#define HY_S_CAPS TD(TD_S_CAPS)
+
+#define ENC_TG TG(_ENC_SCROLL)
 enum tap_dance_codes {
-    TD_SFT_CAPS,
+    TD_S_CAPS,
 };
 
 
-// Combo
+// Combo:
 enum combo_events {
   JL_ESC,
 };
-
 
 const uint16_t PROGMEM my_combo[] = {KC_J, KC_L, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {[JL_ESC] = COMBO(my_combo, KC_ESC)};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_1x2uR(
-      KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
-      LM(_NUMPAD, MOD_LCTL), LCTL_T(KC_A), LSFT_T(KC_S), KC_D, LT(_NUMPAD, KC_F), KC_G, KC_H, KC_J, LCTL_T(KC_K), KC_L, KC_SCLN, KC_QUOT,
-      TD(TD_SFT_CAPS), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, RSFT_T(KC_ENT),
-      TG(_ENC_SCROLL), KC_LGUI, KC_LALT, LM(_NUMPAD, MOD_LALT), LT(_SYMBOL, KC_ENT), MO(_NAV), LSFT_T(KC_SPACE), KC_LEFT, KC_DOWN, KC_UP, LT(_PSCR, KC_RGHT)),
+      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,    KC_BSPC,
+      NUM_CTRL,  HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G,     KC_H,   KC_J,   HOME_K,   KC_L,    KC_SCLN, KC_QUOT,
+      HY_S_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+      ENC_TG,    KC_LGUI, KC_LALT, NUM_ALT, SYM_ENT, MO(_NAV), SFT_SPACE,      SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
 	[_SYMBOL] = LAYOUT_planck_1x2uR(
-      KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSLS,
-      KC_TRNS, KC_GRV, KC_LBRC, KC_LCBR, KC_EQL, KC_PLUS, KC_UNDS, KC_MINS, KC_RCBR, KC_RBRC, KC_COLN, KC_DQUO,
-      KC_TRNS, KC_NO, KC_NO, KC_NO, KC_PIPE, KC_NO, KC_NO, KC_NO, KC_LT, KC_GT, KC_QUES, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  MO(_FUNC), KC_TRNS, KC_LALT, KC_TRNS, KC_TRNS, KC_TRNS),
+      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
+      KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______,   _______, KC_MINS, KC_EQL,  KC_UNDS, KC_COLN, KC_DQUO,
+      _______, KC_PIPE, XXXXXXX, KC_BSLS, KC_TILD, XXXXXXX,   XXXXXXX, KC_PLUS, KC_LT,   KC_GT,   KC_QUES, _______,
+      _______, _______, _______, _______, _______, MO(_FUNC), _______,          KC_LALT, _______, _______, _______),
 
 	[_NAV] = LAYOUT_planck_1x2uR(
-      KC_TRNS, KC_NO, LCTL(KC_RGHT), KC_NO, KC_NO, KC_NO, KC_HOME, KC_PGUP, KC_END, KC_NO, KC_NO, KC_DEL,
-      KC_NO, KC_NO, KC_LSFT, KC_PGDN, KC_LCTL, KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO, KC_NO,
-      KC_TRNS, KC_NO, KC_NO, KC_NO, KC_LCTL, LCTL(KC_LEFT), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS,
-      KC_TRNS, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO),
+      _______, XXXXXXX, C(KC_RGHT),XXXXXXX, XXXXXXX, XXXXXXX,    KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______,
+      XXXXXXX, XXXXXXX, KC_LSFT,   KC_PGDN, KC_LCTL, XXXXXXX,    KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
+      _______, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCTL, C(KC_LEFT), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      _______, XXXXXXX, XXXXXXX,   _______, _______, _______,    KC_LSFT,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),
 
 	[_NUMPAD] = LAYOUT_planck_1x2uR(
-      KC_TAB, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_PPLS, KC_PMNS,
-      KC_LCTL, KC_LCTL, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_4, KC_5, KC_6, KC_PAST, KC_PSLS,
-      KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_1, KC_2, KC_3, KC_PEQL, KC_PEQL,
-      KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
+      KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7, KC_8,  KC_9,   KC_PPLS, _______,
+      KC_LCTL, KC_LCTL, KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_4, KC_5,  KC_6,   KC_PMNS, KC_PAST,
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1, KC_2,  KC_3,   KC_PSLS, KC_PEQL,
+      XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, KC_P0,         KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
 	[_FUNC] = LAYOUT_planck_1x2uR(
-      KC_GRV, RESET, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, TO(_DEBUG_LAYER),
-      KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_MINS, KC_EQL, KC_LBRC, KC_TRNS, KC_BSLS, KC_TRNS,
-      KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
+      KC_GRV,  RESET,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, TO(_DEBUG_LAYER),
+      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, _______, KC_BSLS,
+      _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
+      _______, _______, _______, _______, _______, _______, _______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
 
 	[_DEBUG_LAYER] = LAYOUT_planck_1x2uR(
-      KC_TRNS, RESET, DEBUG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, TO(_BASE),
-      KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-      KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, BL_TOGG, BL_STEP, BL_BRTG, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+      _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, TO(_BASE),
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______,
+      _______, BL_TOGG, BL_STEP, BL_BRTG, _______, _______, _______         , _______, _______, _______, _______),
 
 	[_PSCR] = LAYOUT_planck_1x2uR(
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LCTL(KC_PSCR),
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LALT(KC_PSCR),
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_PSCR,
-      KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS),
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LCTL(KC_PSCR),
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LALT(KC_PSCR),
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX         , XXXXXXX, XXXXXXX, XXXXXXX, _______),
 
 	[_ENC_SCROLL] = LAYOUT_planck_1x2uR(
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      TG(_ENC_SCROLL), _______,_______,_______,_______,_______,_______,_______,_______,_______,_______)
+      ENC_TG,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______)
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -100,6 +113,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LSFT_T(KC_S):
         case LT(_SYMBOL, KC_ENT):
             return TAPPING_TERM - 40;
+        case LT(_SYMBOL, KC_LEFT):
+            return TAPPING_TERM - 70;
         default:
             return TAPPING_TERM;
     }
@@ -200,7 +215,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Tap dance
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_SFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+    [TD_S_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
 };
 
 
