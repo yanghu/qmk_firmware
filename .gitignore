@@ -1,3 +1,4 @@
+.cache/
 .history/
 .dep
 *.o
