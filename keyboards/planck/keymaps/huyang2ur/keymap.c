@@ -39,6 +39,7 @@ enum planck_layers {
 #define NUM_ALT LM(_NUMPAD, MOD_LALT)
 #define SFT_SPACE LSFT_T(KC_SPACE)
 #define SYM_ENT LT(_SYMBOL, KC_ENT)
+#define NAV_ENT LT(_NAV, KC_ENT)
 #define SYM_LEFT LT(_SYMBOL, KC_LEFT)
 
 #define HY_S_CAPS TD(TD_S_CAPS)
@@ -62,13 +63,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,    KC_BSPC,
       NUM_CTRL,  HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G,     KC_H,   KC_J,   HOME_K,   KC_L,    KC_SCLN, KC_QUOT,
       HY_S_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-      ENC_TG,    KC_LGUI, KC_LALT, NUM_ALT, SYM_ENT, MO(_NAV), SFT_SPACE,      SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      ENC_TG,    KC_LGUI, KC_LALT, NUM_ALT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
 	[_SYMBOL] = LAYOUT_planck_1x2uR(
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
       KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______,   _______, KC_MINS, KC_EQL,  KC_UNDS, KC_COLN, KC_DQUO,
-      _______, KC_PIPE, XXXXXXX, KC_BSLS, KC_TILD, XXXXXXX,   XXXXXXX, KC_PLUS, KC_LT,   KC_GT,   KC_QUES, _______,
-      _______, _______, _______, _______, _______, MO(_FUNC), _______,          KC_LALT, _______, _______, _______),
+      _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, XXXXXXX,   XXXXXXX, KC_PLUS, KC_LT,   KC_GT,   KC_QUES, _______,
+      _______, _______, _______, _______, _______, S(KC_ENT),   KC_0,          KC_LALT, _______, _______, _______),
 
 	[_NAV] = LAYOUT_planck_1x2uR(
       _______, XXXXXXX, C(KC_RGHT),XXXXXXX, XXXXXXX, XXXXXXX,    KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______,
@@ -109,11 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LSFT_T(KC_SPACE):
-        case LSFT_T(KC_S):
-        case LT(_SYMBOL, KC_ENT):
+        case SFT_SPACE:
+        case HOME_S:
             return TAPPING_TERM - 40;
-        case LT(_SYMBOL, KC_LEFT):
+        case SYM_LEFT:
             return TAPPING_TERM - 70;
         default:
             return TAPPING_TERM;
@@ -137,6 +137,15 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
             return false;
         case LCTL_T(KC_A):
             return false;
+        default:
+            return false;
+    }
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SFT_T(KC_SPC):
+            return true;
         default:
             return false;
     }
@@ -209,7 +218,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, _NAV));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ENC_SCROLL));
     rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG_LAYER));
-    return state;
+    return update_tri_layer_state(state, _NAV, _SYMBOL, _FUNC);
 }
 
 // Tap dance
@@ -217,6 +226,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_S_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
 };
+
+
+// I need some customized behaviors of mod tap keys:
+// Left S shift: immediate trigger shift: (;, i?)
+// Right K ctrl: immediate trigger: w, a(also, not check A's holding mode in this case)
+// Left A ctrl: immediate trigger: o(ctrl-o in vim), j,k( for vim autocompletion)
+// Space shift: immedage trigger shift: enter, tab.
 
 
 // Initialize variable holding the binary
