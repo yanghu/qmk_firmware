@@ -247,6 +247,7 @@ void register_button(bool pressed, enum mouse_buttons button) {
     currentReport.buttons        = pressed ? currentReport.buttons | button : currentReport.buttons & ~button;
     pointing_device_set_report(currentReport);
 #    endif
+#    endif
 
 #ifdef BILATERAL_COMBINATIONS
 static struct {
