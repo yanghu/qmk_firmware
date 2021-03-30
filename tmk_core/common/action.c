@@ -159,7 +159,7 @@ void process_hand_swap(keyevent_t *event) {
 }
 #endif
 
-#if !defined(NO_ACTION_LAYER) && !defined(STRICT_LAYER_RELEASE)
+#if !defined(NO_ACTION_LAYER) && !defined(STRICT_LAYER_RELEASE)/*{*//*}*//*{*/
 bool disable_action_cache = false;
 
 void process_record_nocache(keyrecord_t *record) {
@@ -169,7 +169,7 @@ void process_record_nocache(keyrecord_t *record) {
 }
 #else
 void process_record_nocache(keyrecord_t *record) { process_record(record); }
-#endif
+#endif/*}*/
 
 __attribute__((weak)) bool process_record_quantum(keyrecord_t *record) { return true; }
 
@@ -247,6 +247,7 @@ void register_button(bool pressed, enum mouse_buttons button) {
     currentReport.buttons        = pressed ? currentReport.buttons | button : currentReport.buttons & ~button;
     pointing_device_set_report(currentReport);
 #    endif
+}
 #    endif
 
 #ifdef BILATERAL_COMBINATIONS
@@ -287,10 +288,12 @@ static void bilateral_combinations_hold(action_t action, keyevent_t event) {
 
 // Returns true for certain combo of key+mods that we want to execute frequently.
 static bool bilateral_exceptions(uint8_t code, uint8_t mods) {
-  if (code == KC_C || code == KC_V) {
-    return mods & MOD_MASK_CTRL;
-  }
-  return false;
+    if (mods & MOD_MASK_CTRL || mods & MOD_MASK_CS) {
+        if (code == KC_C || code == KC_V || code == KC_SPACE || code == KC_U || code == KC_W || code == KC_T) {
+            return true;
+        }
+    }
+    return false;
 }
 
 static void bilateral_combinations_release(uint8_t code) {
@@ -333,7 +336,7 @@ void process_action(keyrecord_t *record, action_t action) {
     uint8_t tap_count = record->tap.count;
 #endif
 
-#ifndef NO_ACTION_ONESHOT
+#ifndef NO_ACTION_ONESHOT/*{*/
     bool do_release_oneshot = false;
     // notice we only clear the one shot layer if the pressed key is not a modifier.
     if (is_oneshot_layer_active() && event.pressed && (action.kind.id == ACT_USAGE || !IS_MOD(action.key.code))
@@ -344,7 +347,7 @@ void process_action(keyrecord_t *record, action_t action) {
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
         do_release_oneshot = !is_oneshot_layer_active();
     }
-#endif
+#endif/*}*/
 
     switch (action.kind.id) {
         /* Key and Mods */

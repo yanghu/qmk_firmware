@@ -147,7 +147,7 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     case SFT_T(KC_SPC):
       return true;
     default:
-      return false;
+      return true;
   }
 }
 
