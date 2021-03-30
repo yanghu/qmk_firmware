@@ -285,6 +285,14 @@ static void bilateral_combinations_hold(action_t action, keyevent_t event) {
 #    endif
 }
 
+// Returns true for certain combo of key+mods that we want to execute frequently.
+static bool bilateral_exceptions(uint8_t code, uint8_t mods) {
+  if (code == KC_C || code == KC_V) {
+    return mods & MOD_MASK_CTRL;
+  }
+  return false;
+}
+
 static void bilateral_combinations_release(uint8_t code) {
     dprint("BILATERAL_COMBINATIONS: release\n");
     if (bilateral_combinations.active && (code == bilateral_combinations.code)) {
@@ -292,7 +300,7 @@ static void bilateral_combinations_release(uint8_t code) {
     }
 }
 
-static void bilateral_combinations_tap(keyevent_t event) {
+static void bilateral_combinations_tap(keyevent_t event, uint8_t code) {
     dprint("BILATERAL_COMBINATIONS: tap\n");
     if (bilateral_combinations.active) {
         if (bilateral_combinations_left(event.key) == bilateral_combinations.left) {
@@ -302,6 +310,10 @@ static void bilateral_combinations_tap(keyevent_t event) {
                 return;
             }
 #    endif
+            if (bilateral_exceptions(code, bilateral_combinations.mods)){
+              dprint("BILATERAL_COMBINATIONS: exception.");
+              return;
+            }
             dprint("BILATERAL_COMBINATIONS: change\n");
             unregister_mods(bilateral_combinations.mods);
             tap_code(bilateral_combinations.tap);
@@ -354,7 +366,7 @@ void process_action(keyrecord_t *record, action_t action) {
 #ifdef BILATERAL_COMBINATIONS
                 if (!(IS_MOD(action.key.code) || action.key.code == KC_NO)) {
                     // regular keycode tap during mod-tap hold
-                    bilateral_combinations_tap(event);
+                    bilateral_combinations_tap(event, action.key.code);
                 }
 #endif
                 register_code(action.key.code);
@@ -446,7 +458,7 @@ void process_action(keyrecord_t *record, action_t action) {
                             {
 #    ifdef BILATERAL_COMBINATIONS
                                 // mod-tap tap
-                                bilateral_combinations_tap(event);
+                                bilateral_combinations_tap(event, action.key.code);
 #    endif
                                 dprint("MODS_TAP: Tap: register_code\n");
                                 register_code(action.key.code);
@@ -650,7 +662,7 @@ void process_action(keyrecord_t *record, action_t action) {
                         if (tap_count > 0) {
 #        ifdef BILATERAL_COMBINATIONS
                             // layer-tap tap
-                            bilateral_combinations_tap(event);
+                            bilateral_combinations_tap(event, action.key.code);
 #        endif
                             dprint("KEYMAP_TAP_KEY: Tap: register_code\n");
                             register_code(action.layer_tap.code);
