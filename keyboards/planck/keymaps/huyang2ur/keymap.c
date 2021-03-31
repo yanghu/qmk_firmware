@@ -17,6 +17,9 @@
 // TODO: add shift + backspace = delete
 // TODO: add ctrl + symbols?
 
+#include "action_layer.h"
+#include "quantum.h"
+#include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 
 enum planck_layers {
@@ -28,6 +31,7 @@ enum planck_layers {
   _DEBUG_LAYER,
   _PSCR,
   _ENC_SCROLL,
+  _ENC_VIM,
 };
 
 #define HOME_A LCTL_T(KC_A)
@@ -49,6 +53,9 @@ enum tap_dance_codes {
   TD_S_CAPS,
 };
 
+enum cusom_keys {
+  ENC_SWITCH = SAFE_RANGE
+};
 
 // Combo:
 enum combo_events {
@@ -63,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,    KC_BSPC,
       NUM_CTRL,  HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G,     KC_H,   KC_J,   HOME_K,   KC_L,    KC_SCLN, KC_QUOT,
       HY_S_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-      ENC_TG,    KC_LGUI, KC_LALT, NUM_ALT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      ENC_SWITCH,    KC_LGUI, KC_LALT, NUM_ALT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
   [_SYMBOL] = LAYOUT_planck_1x2uR(
       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
@@ -105,7 +112,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
       _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      ENC_TG,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______)
+      ENC_SWITCH,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______),
+
+  [_ENC_VIM] = LAYOUT_planck_1x2uR(
+      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
+      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
+      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
+      ENC_SWITCH,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______)
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -176,7 +189,17 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         tap_code(KC_PGUP);
 #endif
       }
-  }
+      break;
+    case _ENC_VIM:
+      // Somehow my encoder direction is reversed
+      if (clockwise) {
+        tap_code16(C(KC_Y));
+      }
+      else {
+        tap_code16(C(KC_E));
+      }
+    break;
+}
 }
 
 
@@ -191,18 +214,18 @@ const rgblight_segment_t PROGMEM enc_scroll_layer[] = RGBLIGHT_LAYER_SEGMENTS({0
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    base_layer,
-    numpad_layer,
-    nav_layer,
-    enc_scroll_layer,
-    capslock_layer,
-    adjust_layer
-    );
+  base_layer,
+  numpad_layer,
+  nav_layer,
+  enc_scroll_layer,
+  capslock_layer,
+  adjust_layer
+  );
 
 void keyboard_post_init_user(void) {
-  // Enable the LED layers
-  rgblight_layers = rgb_layers;
-  // rgblight_set_layer_state(0, true);
+// Enable the LED layers
+rgblight_layers = rgb_layers;
+// rgblight_set_layer_state(0, true);
 }
 
 bool led_update_user(led_t led_state) {
@@ -218,6 +241,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   rgblight_set_layer_state(2, layer_state_cmp(state, _NAV));
   rgblight_set_layer_state(3, layer_state_cmp(state, _ENC_SCROLL));
   rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG_LAYER));
+  rgblight_set_layer_state(5, layer_state_cmp(state, _ENC_VIM));
   return update_tri_layer_state(state, _NAV, _SYMBOL, _FUNC);
 }
 
@@ -270,6 +294,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         // Let QMK process the KC_BSPC keycode as usual outside of shift
         return true;
+      } // case kc_bspc
+    case ENC_SWITCH:
+      {
+        // Toggle encoder layers based on current layer.
+        if (IS_LAYER_ON(_ENC_VIM)) {
+          // Back to base if at vim layer.
+          layer_off(_ENC_SCROLL);
+          layer_off(_ENC_VIM);
+        } else if (IS_LAYER_ON(_ENC_SCROLL)) {
+          // if scroll layer is on, turn on vim layer.
+          layer_on(_ENC_VIM);
+        } else {
+          layer_on(_ENC_SCROLL);
+        }
+        return false;
       }
   }
   return true;
