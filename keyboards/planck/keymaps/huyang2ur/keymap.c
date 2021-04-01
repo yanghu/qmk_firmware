@@ -21,6 +21,8 @@
 #include "config.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
+#include "users/yanghu/wrappers.h"
+#include "yanghu.h"
 #include QMK_KEYBOARD_H
 
 enum planck_layers {
@@ -35,10 +37,10 @@ enum planck_layers {
   _ENC_VIM,
 };
 
-#define HOME_A LCTL_T(KC_A)
-#define HOME_S LSFT_T(KC_S)
-#define HOME_F LT(_NUMPAD, KC_F)
-#define HOME_K LCTL_T(KC_K)
+/* #define HOME_A LCTL_T(KC_A) */
+/* #define HOME_S LSFT_T(KC_S) */
+/* #define HOME_F LT(_NUMPAD, KC_F) */
+/* #define HOME_K LCTL_T(KC_K) */
 
 #define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
 #define NUM_ALT LM(_NUMPAD, MOD_LALT)
@@ -66,60 +68,62 @@ enum combo_events {
 const uint16_t PROGMEM my_combo[] = {KC_J, KC_L, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {[JL_ESC] = COMBO(my_combo, KC_ESC)};
 
+#define LAYOUT_wrapper(...)            LAYOUT_planck_1x2uR(__VA_ARGS__)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = LAYOUT_planck_1x2uR(
-      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,    KC_BSPC,
-      NUM_CTRL,  HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G,     KC_H,   KC_J,   HOME_K,   KC_L,    KC_SCLN, KC_QUOT,
-      HY_S_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+  [_BASE] = LAYOUT_wrapper(
+      __________QWERTY_L1__________, __________QWERTY_R1__________,
+      __________QWERTY_L2__________, __________QWERTY_R2__________,
+      __________QWERTY_L3__________, __________QWERTY_R3__________,
       ENC_SWITCH,    KC_LGUI, KC_LALT, NUM_ALT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
-  [_SYMBOL] = LAYOUT_planck_1x2uR(
-      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-      KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______,   _______, KC_MINS, KC_EQL,  KC_UNDS, KC_COLN, KC_DQUO,
-      _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, XXXXXXX,   XXXXXXX, KC_PLUS, KC_LT,   KC_GT,   KC_QUES, _______,
-      _______, _______, _______, _______, _______, S(KC_ENT),   KC_0,          KC_LALT, _______, _______, _______),
+  [_SYMBOL] = LAYOUT_wrapper(
+      __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
+      __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
+      __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
+      __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
 
-  [_NAV] = LAYOUT_planck_1x2uR(
-      _______, XXXXXXX, C(KC_RGHT),XXXXXXX, XXXXXXX, XXXXXXX,    KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______,
-      XXXXXXX, XXXXXXX, KC_LSFT,   KC_PGDN, KC_LCTL, XXXXXXX,    KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
-      _______, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCTL, C(KC_LEFT), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-      _______, XXXXXXX, XXXXXXX,   _______, _______, _______,    KC_LSFT,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),
+  [_NAV] = LAYOUT_wrapper(
+      __________NOKEY_________, __________NAV_R1__________,
+      __________NAV_L2__________, __________NAV_R2__________, 
+      _______, __________NOKEY5_________, __________NOKEY5_________, _______,
+      __________BLANK__________,                  __________BLANK5__________),
 
-  [_NUMPAD] = LAYOUT_planck_1x2uR(
-      KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7, KC_8,  KC_9,   KC_PPLS, _______,
-      KC_LCTL, KC_LCTL, KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_4, KC_5,  KC_6,   KC_PMNS, KC_PAST,
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1, KC_2,  KC_3,   KC_PSLS, KC_PEQL,
-      XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, KC_P0,         KC_P0, KC_DOT, KC_PENT, KC_PENT),
+  [_NUMPAD] = LAYOUT_wrapper(
+      __________NUM_L1__________, __________NUM_R1__________,
+      __________NUM_L2__________, __________NUM_R2__________,
+      __________NUM_L3__________, __________NUM_R3__________,
+      __________BLANK__________,  KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
-  [_FUNC] = LAYOUT_planck_1x2uR(
-      KC_GRV,  RESET,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, TO(_DEBUG_LAYER),
-      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, _______, KC_BSLS,
-      _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-      _______, _______, _______, _______, _______, _______, _______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
+  [_FUNC] = LAYOUT_wrapper(
+      __________FUNC_L1__________, __________FUNC_R1__________,
+      __________FUNC_L2__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________ ,_______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
 
-  [_DEBUG_LAYER] = LAYOUT_planck_1x2uR(
-      _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, TO(_BASE),
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______,
-      _______, BL_TOGG, BL_STEP, BL_BRTG, _______, _______, _______         , _______, _______, _______, _______),
+  [_DEBUG_LAYER] = LAYOUT_wrapper(
+      __________DEBUG_L1__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK5__________),
 
-  [_PSCR] = LAYOUT_planck_1x2uR(
+  [_PSCR] = LAYOUT_wrapper(
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LCTL(KC_PSCR),
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LALT(KC_PSCR),
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR,
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX         , XXXXXXX, XXXXXXX, XXXXXXX, _______),
 
-  [_ENC_SCROLL] = LAYOUT_planck_1x2uR(
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      ENC_SWITCH,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______),
+  [_ENC_SCROLL] = LAYOUT_wrapper(
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      ENC_SWITCH, __________BLANK5__________, __________BLANK5__________),
 
-  [_ENC_VIM] = LAYOUT_planck_1x2uR(
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-      ENC_SWITCH,  _______,_______,_______,_______,_______,_______        ,_______,_______,_______,_______)
+  [_ENC_VIM] = LAYOUT_wrapper(
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      ENC_SWITCH, __________BLANK5__________, __________BLANK5__________)
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
