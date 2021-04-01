@@ -18,6 +18,7 @@
 // TODO: add ctrl + symbols?
 
 #include "action_layer.h"
+#include "config.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
@@ -125,9 +126,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SFT_SPACE:
     case HOME_S:
+    case HOME_F:
       return TAPPING_TERM - 40;
     case SYM_LEFT:
       return TAPPING_TERM - 70;
+    case HOME_A:
+      return TAPPING_TERM + 10;
     default:
       return TAPPING_TERM;
   }
@@ -135,7 +139,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case LSFT_T(KC_S):
+    case HOME_S:
       return true;
     default:
       return false;
@@ -145,8 +149,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LSFT_T(KC_SPACE):
-      return false;
-    case LT(_SYMBOL, KC_ENT):
       return false;
     case LCTL_T(KC_A):
       return false;
