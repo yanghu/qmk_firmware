@@ -21,52 +21,8 @@
 #include "config.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
-#include "users/yanghu/wrappers.h"
 #include "yanghu.h"
 #include QMK_KEYBOARD_H
-
-enum planck_layers {
-  _BASE,
-  _SYMBOL,
-  _NAV,
-  _NUMPAD,
-  _FUNC,
-  _DEBUG_LAYER,
-  _PSCR,
-  _ENC_SCROLL,
-  _ENC_VIM,
-};
-
-/* #define HOME_A LCTL_T(KC_A) */
-/* #define HOME_S LSFT_T(KC_S) */
-/* #define HOME_F LT(_NUMPAD, KC_F) */
-/* #define HOME_K LCTL_T(KC_K) */
-
-#define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
-#define NUM_ALT LM(_NUMPAD, MOD_LALT)
-#define SFT_SPACE LSFT_T(KC_SPACE)
-#define SYM_ENT LT(_SYMBOL, KC_ENT)
-#define NAV_ENT LT(_NAV, KC_ENT)
-#define SYM_LEFT LT(_SYMBOL, KC_LEFT)
-
-#define HY_S_CAPS TD(TD_S_CAPS)
-
-#define ENC_TG TG(_ENC_SCROLL)
-enum tap_dance_codes {
-  TD_S_CAPS,
-};
-
-enum cusom_keys {
-  ENC_SWITCH = SAFE_RANGE
-};
-
-// Combo:
-enum combo_events {
-  JL_ESC,
-};
-
-const uint16_t PROGMEM my_combo[] = {KC_J, KC_L, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {[JL_ESC] = COMBO(my_combo, KC_ESC)};
 
 #define LAYOUT_wrapper(...)            LAYOUT_planck_1x2uR(__VA_ARGS__)
 
@@ -125,50 +81,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________BLANK__________, __________BLANK__________,
       ENC_SWITCH, __________BLANK5__________, __________BLANK5__________)
 };
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case SFT_SPACE:
-    case HOME_S:
-    case HOME_F:
-      return TAPPING_TERM - 40;
-    case SYM_LEFT:
-      return TAPPING_TERM - 70;
-    case HOME_A:
-      return TAPPING_TERM + 10;
-    default:
-      return TAPPING_TERM;
-  }
-}
-
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case HOME_S:
-      return true;
-    default:
-      return false;
-  }
-}
-
-bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case LSFT_T(KC_SPACE):
-      return false;
-    case LCTL_T(KC_A):
-      return false;
-    default:
-      return false;
-  }
-}
-
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case SFT_T(KC_SPC):
-      return true;
-    default:
-      return true;
-  }
-}
 
 void encoder_update_user(uint8_t index, bool clockwise) {
   switch(get_highest_layer(layer_state)){
@@ -251,11 +163,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _NAV, _SYMBOL, _FUNC);
 }
 
-// Tap dance
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_S_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
-};
-
 
 // I need some customized behaviors of mod tap keys:
 // Left S shift: immediate trigger shift: (;, i?)
@@ -263,46 +170,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Left A ctrl: immediate trigger: o(ctrl-o in vim), j,k( for vim autocompletion)
 // Space shift: immedage trigger shift: enter, tab.
 
-
-// Initialize variable holding the binary
-// representation of active modifiers.
-uint8_t mod_state;
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // Store the current modifier state in the variable for later reference
-  mod_state = get_mods();
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
   switch (keycode) {
-    case KC_BSPC:
-      {
-        // Initialize a boolean variable that keeps track
-        // of the delete key status: registered or not?
-        static bool delkey_registered;
-        if (record->event.pressed) {
-          // Detect the activation of either shift keys
-          if (mod_state & MOD_MASK_SHIFT) {
-            // First temporarily canceling both shifts so that
-            // shift isn't applied to the KC_DEL keycode
-            del_mods(MOD_MASK_SHIFT);
-            register_code(KC_DEL);
-            // Update the boolean variable to reflect the status of KC_DEL
-            delkey_registered = true;
-            // Reapplying modifier state so that the held shift key(s)
-            // still work even after having tapped the Backspace/Delete key.
-            set_mods(mod_state);
-            return false;
-          }
-        } else { // on release of KC_BSPC
-          // In case KC_DEL is still being sent even after the release of KC_BSPC
-          if (delkey_registered) {
-            unregister_code(KC_DEL);
-            delkey_registered = false;
-            return false;
-          }
-        }
-        // Let QMK process the KC_BSPC keycode as usual outside of shift
-        return true;
-      } // case kc_bspc
     case ENC_SWITCH:
-      {
+      if (record->event.pressed) {
         // Toggle encoder layers based on current layer.
         if (IS_LAYER_ON(_ENC_VIM)) {
           // Back to base if at vim layer.
@@ -316,6 +187,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
-  }
+  } // switch
   return true;
-};
+}
