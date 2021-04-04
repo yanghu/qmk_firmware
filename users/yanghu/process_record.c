@@ -1,6 +1,11 @@
 #include "process_record.h"
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
+#include "layers.h"
+
+__attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state){
+  return state;
+}
 
 // Initialize variable holding the binary
 // representation of active modifiers.
@@ -42,3 +47,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   } // switch
   return process_record_keymap(keycode, record);
 };
+
+
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  state = update_tri_layer_state(state, _NAV, _SYMBOL, _FUNC);
+  return layer_state_set_keymap(state);
+}

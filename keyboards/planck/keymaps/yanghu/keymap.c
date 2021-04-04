@@ -152,7 +152,7 @@ bool led_update_user(led_t led_state) {
 }
 
 
-layer_state_t layer_state_set_user(layer_state_t state) {
+layer_state_t layer_state_set_keymap(layer_state_t state) {
   // Set RBG layer according to active keymap layer.
   rgblight_set_layer_state(0, layer_state_cmp(state, _BASE));
   rgblight_set_layer_state(1, layer_state_cmp(state, _NUMPAD));
@@ -160,7 +160,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   rgblight_set_layer_state(3, layer_state_cmp(state, _ENC_SCROLL));
   rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG_LAYER));
   rgblight_set_layer_state(5, layer_state_cmp(state, _ENC_VIM));
-  return update_tri_layer_state(state, _NAV, _SYMBOL, _FUNC);
+  return state;
 }
 
 
