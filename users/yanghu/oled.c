@@ -100,3 +100,19 @@ void oled_render_mods(void) {
   }
   return;
 }
+
+void oled_render_capslock(bool caps_on) {
+  static const char PROGMEM capslock_logo[] = {
+    0x9c, 0x9d, 0x9e, 0x9f, 10,
+    0xbc, 0xbd, 0xbe, 0xbf, 10,
+    0xdc, 0xdd, 0xde, 0xdf, 10,
+    0
+  };
+  if (caps_on) {
+    oled_write_P(capslock_logo, false);
+  } else {
+    for (int i=0; i<3; ++i) {
+      oled_write_ln(" ", false);
+    }
+  }
+}

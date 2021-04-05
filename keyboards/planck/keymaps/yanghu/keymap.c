@@ -146,11 +146,6 @@ rgblight_layers = rgb_layers;
 // rgblight_set_layer_state(0, true);
 }
 
-bool led_update_user(led_t led_state) {
-  rgblight_set_layer_state(4, led_state.caps_lock);
-  return true;
-}
-
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
   // Set RBG layer according to active keymap layer.
