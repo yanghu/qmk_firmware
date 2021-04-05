@@ -16,3 +16,6 @@
 #define COMBO_COUNT 1
 
 #define COMBO_TERM 60
+
+#define OLED_FONT_H "users/yanghu/glcdfont.c"
+

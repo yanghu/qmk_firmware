@@ -33,13 +33,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-        NUM_ALT, MO(_SYMBOL), NAV_ENT,  KC_LSFT, KC_SPACE, KC_LALT),
+        NUM_ALT, MO(_SYMBOL), NAV_ENT,  KC_LALT, SFT_SPACE, KC_LGUI),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
-      _______, _______, S(KC_ENT),  _______,  KC_0 ,KC_LALT),
+      _______, _______, S(KC_ENT),  _______,  KC_0, _______),
 
   [_NAV] = LAYOUT_wrapper(
       __________NOKEY_________, __________NAV_R1__________,
@@ -69,7 +69,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
   switch (keycode) {
   } // switch
-
 #ifdef OLED_DRIVER_ENABLE
   if (record->event.pressed) {
     set_keylog(keycode, record);
@@ -85,33 +84,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     /* return OLED_ROTATION_90;  // flips the display 180 degrees if offhand */
   /* } */
   return OLED_ROTATION_270;
-}
-
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
-
-void oled_render_layer_state(void) {
-    oled_write_P(PSTR("L: \n"), false);
-    switch (layer_state) {
-        case L_BASE:
-            oled_write_ln_P(PSTR("BASE"), false);
-            break;
-        case L_LOWER:
-            oled_write_ln_P(PSTR("SYM"), false);
-            break;
-        case L_RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
-            break;
-        case L_ADJUST:
-        case L_ADJUST|L_LOWER:
-        case L_ADJUST|L_RAISE:
-        case L_ADJUST|L_LOWER|L_RAISE:
-            oled_write_ln_P(PSTR("NUM"), false);
-            break;
-    }
-    oled_write_P(PSTR("\n"), false);
 }
 
 
@@ -158,21 +130,12 @@ void render_bootmagic_status(bool status) {
     }
 }
 
-void oled_render_logo(void) {
-    static const char PROGMEM crkbd_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-        0};
-    oled_write_P(crkbd_logo, false);
-}
-
 void oled_task_user(void) {
     if (is_master) {
-        oled_render_layer_state();
-        oled_render_keylog();
-    } else {
-        oled_render_logo();
+      /* oled_render_layer_state(); */
+      /* oled_render_keylog(); */
+      oled_render_layer();
+      oled_render_mods();
     }
 }
 

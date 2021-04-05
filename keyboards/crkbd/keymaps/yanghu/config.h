@@ -12,5 +12,6 @@
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17
 #endif
-
+#ifndef OLED_FONT_H 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+#endif
