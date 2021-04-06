@@ -113,6 +113,8 @@ void oled_render_mods(void) {
   return;
 }
 
+// Call this from "led_update_user" and use `led_state.caps_lock` to check
+// the status of capslock.
 void oled_render_capslock(bool caps_on) {
   static const char PROGMEM capslock_logo[] = {
     0x9c, 0x9d, 0x9e, 0x9f, 10,
