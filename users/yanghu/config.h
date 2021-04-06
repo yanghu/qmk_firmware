@@ -13,7 +13,7 @@
 #define PERMISSIVE_HOLD_PER_KEY
 #define TAPPING_FORCE_HOLD
 
-#define COMBO_COUNT 1
+#define COMBO_COUNT 2
 
 #define COMBO_TERM 60
 

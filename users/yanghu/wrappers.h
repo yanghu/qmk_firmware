@@ -17,6 +17,13 @@
 #define __________QWERTY_R3__________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT)
 
 // Symbol
+// ______________________________________________________________________________
+// |  ~  |  !  |  @  |  #  |  $  |  %  |----|  ^  |  &  |  *  |  (  |  )  |     |
+// ------------------------------------------------------------------------------
+// |  `  |  [  |  ]  |  {  |  }  |  g  |----|  h  |  -  |  =  |  _  |  :  |  "  |
+// ------------------------------------------------------------------------------
+// |     |  |  |  `  |  \  |  ~  |     |----|     |  +  |  <  |  >  |  ?  |     |
+// ------------------------------------------------------------------------------
 #define __________SYMBOL_L1__________       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
 #define __________SYMBOL_L2__________       KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______
 #define __________SYMBOL_L3__________      _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, XXXXXXX
@@ -30,9 +37,10 @@
 #define __________BLANK5__________       _______, _______, _______, _______, _______
 #define __________NOKEY5_________        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
+#define __________NAV_L1__________       KC_TAB,  NAV_TAB , A(KC_1), A(KC_2), A(KC_3), A(KC_4)
+#define __________NAV_L2__________       XXXXXXX, XXXXXXX, KC_LSFT,   KC_PGDN, KC_LCTL, A(KC_5)
 #define __________NAV_R1__________       KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______
 #define __________NAV_R2__________       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX
-#define __________NAV_L2__________       XXXXXXX, XXXXXXX, KC_LSFT,   KC_PGDN, KC_LCTL, XXXXXXX
 
 #define __________NUM_L1__________       KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5
 #define __________NUM_L2__________       KC_LCTL, KC_LCTL, KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX

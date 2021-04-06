@@ -22,5 +22,6 @@ enum tap_dance_codes {
 };
 
 enum cusom_keys {
-  ENC_SWITCH = SAFE_RANGE
+  ENC_SWITCH = SAFE_RANGE,
+  NAV_TAB,
 };
