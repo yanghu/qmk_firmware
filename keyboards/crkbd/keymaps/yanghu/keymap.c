@@ -34,13 +34,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-        NUM_ALT, NAV_ENT, MO(_SYMBOL), SFT_SPACE, KC_BSPC, KC_LGUI),
+        NUM_ALT, MO(_SYMBOL), NAV_ENT, KC_BSPC, SFT_SPACE, KC_LGUI),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
-      _______, _______, _______,  KC_0,  _______, KC_LALT),
+      _______, _______, _______, _______,  KC_0,  KC_LALT),
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_L1__________, __________NAV_R1__________,
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________NUM_L1__________, __________NUM_R1__________,
       __________NUM_L2__________, __________NUM_R2__________,
       __________NUM_L3__________, __________NUM_R3__________,
-      _______, _______, _______, KC_0, KC_DOT, KC_PENT),
+      _______, _______, _______, KC_PENT, KC_0, KC_DOT),
 
   [_FUNC] = LAYOUT_wrapper(
       __________FUNC_L1__________, __________FUNC_R1__________,
