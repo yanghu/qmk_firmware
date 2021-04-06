@@ -21,6 +21,11 @@ void oled_render_layer(void) {
   /*   0xa0, 0xa1, 0xa2, 0xa3, 10, */
   /*   0xc0, 0xc1, 0xc2, 0xc3, 10, */
   /*   0}; */
+  static const char PROGMEM nav_logo[] = {
+    0x92, 0x93, 0x94, 0x95, 10,
+    0xb2, 0xb3, 0xb4, 0xb5, 10,
+    0xd2, 0xd3, 0xd4, 0xd5, 10,
+    0};
   static const char PROGMEM symbol_logo[] = {
     0x8a, 0x8b, 0x8c, 0x8d, 10,
     0xaa, 0xab, 0xac, 0xad, 10,
@@ -35,6 +40,8 @@ void oled_render_layer(void) {
     oled_write_P(symbol_logo, false);
   } else if (IS_LAYER_ON(_NUMPAD)){
     oled_write_P(numlock_logo, false);
+  } else if (IS_LAYER_ON(_NAV)){
+    oled_write_P(nav_logo, false);
   } else if (IS_LAYER_ON(_BASE)){
     oled_write_P(qmk_logo, false);
   } else {
