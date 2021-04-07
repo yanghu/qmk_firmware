@@ -21,6 +21,7 @@
 #include "config.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
+#include "users/yanghu/layers.h"
 #include "users/yanghu/wrappers.h"
 #include "yanghu.h"
 #include QMK_KEYBOARD_H
@@ -57,6 +58,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________FUNC_L2__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________ ,_______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
+
+  [_LAYER_SEL] = LAYOUT_wrapper(
+      __________LAYER_SEL_L1__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK5__________),
 
   [_DEBUG_LAYER] = LAYOUT_wrapper(
       __________DEBUG_L1__________, __________BLANK__________,

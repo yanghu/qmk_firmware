@@ -60,11 +60,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________),
 
+  [_LAYER_SEL] = LAYOUT_wrapper(
+      __________LAYER_SEL_L1__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________),
+
   [_DEBUG_LAYER] = LAYOUT_wrapper(
       __________DEBUG_L1__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
-      __________BLANK__________)
+      __________BLANK__________),
+
+  [_PSCR] = LAYOUT_wrapper(
+      __________NOKEY_________, __________NOKEY5_________, LALT(KC_PSCR),
+      __________NOKEY_________, __________NOKEY5_________, KC_PSCR,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK5__________, KC_LCTRL),
 };
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
