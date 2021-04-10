@@ -5,9 +5,12 @@
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SFT_SPACE:
+      return TAPPING_TERM - 20;
     case HOME_S:
     case HOME_F:
       return TAPPING_TERM - 40;
+    case HOME_D:
+      return TAPPING_TERM - 45;
     case SYM_LEFT:
       return TAPPING_TERM - 70;
     case HOME_A:
@@ -20,6 +23,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case HOME_S:
+    case NAV_ENT:
+    case SFT_SPACE:
       return true;
     default:
       return false;

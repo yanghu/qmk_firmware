@@ -13,6 +13,9 @@
 #define PERMISSIVE_HOLD_PER_KEY
 #define TAPPING_FORCE_HOLD
 
-#define COMBO_COUNT 1
+#define COMBO_COUNT 3
 
 #define COMBO_TERM 60
+
+#define OLED_FONT_H "users/yanghu/glcdfont.c"
+

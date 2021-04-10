@@ -6,6 +6,7 @@ enum planck_layers {
   _NAV,
   _NUMPAD,
   _FUNC,
+  _LAYER_SEL,
   _DEBUG_LAYER,
   _PSCR,
   _ENC_SCROLL,

@@ -21,6 +21,8 @@
 #include "config.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
+#include "users/yanghu/layers.h"
+#include "users/yanghu/wrappers.h"
 #include "yanghu.h"
 #include QMK_KEYBOARD_H
 
@@ -40,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
 
   [_NAV] = LAYOUT_wrapper(
-      __________NOKEY_________, __________NAV_R1__________,
+      __________NAV_L1__________, __________NAV_R1__________,
       __________NAV_L2__________, __________NAV_R2__________, 
       _______, __________NOKEY5_________, __________NOKEY5_________, _______,
       __________BLANK__________,                  __________BLANK5__________),
@@ -56,6 +58,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________FUNC_L2__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________ ,_______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
+
+  [_LAYER_SEL] = LAYOUT_wrapper(
+      __________LAYER_SEL_L1__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK__________,
+      __________BLANK__________, __________BLANK5__________),
 
   [_DEBUG_LAYER] = LAYOUT_wrapper(
       __________DEBUG_L1__________, __________BLANK__________,
@@ -144,11 +152,6 @@ void keyboard_post_init_user(void) {
 // Enable the LED layers
 rgblight_layers = rgb_layers;
 // rgblight_set_layer_state(0, true);
-}
-
-bool led_update_user(led_t led_state) {
-  rgblight_set_layer_state(4, led_state.caps_lock);
-  return true;
 }
 
 
