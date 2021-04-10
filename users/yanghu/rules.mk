@@ -3,6 +3,7 @@ SRC += yanghu.c \
 			 combo.c \
 			 process_record.c
 
+BOOTMAGIC_ENABLE = full
 TAP_DANCE_ENABLE = yes
 COMBO_ENABLE = yes
 
