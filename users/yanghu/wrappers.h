@@ -8,13 +8,22 @@
 
 // clang-format off
 // qwerty letters.
-#define __________QWERTY_L1__________       KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
-#define __________QWERTY_L2__________       HY_S_CAPS,HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G
-#define __________QWERTY_L3__________       KC_LALT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
 
-#define __________QWERTY_R1__________       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC
-#define __________QWERTY_R2__________       KC_H,    KC_J,    HOME_K,  KC_L,    KC_SCLN, KC_QUOT
-#define __________QWERTY_R3__________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LT(_PSCR, KC_ENT)
+#define __________QWERTY_BASE_L1__________       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
+#define __________QWERTY_BASE_L2__________       HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G
+#define __________QWERTY_BASE_L3__________       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
+
+#define __________QWERTY_BASE_R1__________       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P
+#define __________QWERTY_BASE_R2__________       KC_H,    KC_J,    HOME_K,  KC_L,    KC_SCLN
+#define __________QWERTY_BASE_R3__________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
+
+#define __________QWERTY_L1__________       KC_TAB,     __________QWERTY_BASE_L1__________
+#define __________QWERTY_L2__________       HY_S_CAPS,  __________QWERTY_BASE_L2__________
+#define __________QWERTY_L3__________       KC_LALT,    __________QWERTY_BASE_L3__________
+
+#define __________QWERTY_R1__________       __________QWERTY_BASE_R1__________, KC_BSPC
+#define __________QWERTY_R2__________       __________QWERTY_BASE_R2__________, KC_QUOT
+#define __________QWERTY_R3__________       __________QWERTY_BASE_R3__________, LT(_PSCR, KC_ENT)
 
 // Symbol
 // ______________________________________________________________________________
@@ -56,5 +65,20 @@
 
 #define __________DEBUG_L1__________      TO(_BASE), DEBUG, _______, _______, _______, _______
 
-#define __________LAYER_SEL_L1__________  TO(_BASE), _______, _______, _______, _______, _______
+#define __________LAYER_SEL_L1__________  TO(_BASE), TO(_CAD), _______, _______, _______, _______
 
+
+#define __________CAD_L1__________       KC_ESC,    __________BLANK5__________
+#define __________CAD_L2__________       HY_S_CAPS, __________BLANK5__________
+#define __________CAD_L3__________       KC_LALT,   __________BLANK5__________
+#define __________CAD_L4__________       SH_OS,  TT(_CAD_NUM), _______
+
+#define __________CAD_R1__________       __________BLANK5__________, KC_DEL
+#define __________CAD_R2__________       __________BLANK__________
+#define __________CAD_R3__________       __________BLANK5__________, KC_LSFT
+#define __________CAD_R4__________       _______,  _______, TO(_BASE)
+
+#define __________CAD_NUM_L1__________  _______, KC_AT, KC_9, KC_8, KC_7, KC_PLUS
+#define __________CAD_NUM_L2__________  KC_GRV, KC_COMM, KC_6, KC_5, KC_4, KC_MINS
+#define __________CAD_NUM_L3__________  _______, KC_DOT,  KC_3, KC_2, KC_1, KC_LT
+#define __________CAD_NUM_L4__________  KC_0,  _______, _______

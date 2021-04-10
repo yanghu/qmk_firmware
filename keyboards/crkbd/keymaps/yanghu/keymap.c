@@ -19,6 +19,7 @@
 
 #include "config.h"
 #include "keycode.h"
+#include "layers.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
 #include "users/yanghu/wrappers.h"
@@ -59,6 +60,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________FUNC_L2__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________),
+
+  [_CAD] = LAYOUT_wrapper(
+      __________CAD_L1__________, __________CAD_R1__________,
+      __________CAD_L2__________, __________CAD_R2__________,
+      __________CAD_L3__________, __________CAD_R3__________,
+      __________CAD_L4__________, __________CAD_R4__________),
+
+  [_CAD_NUM] = LAYOUT_wrapper(
+      __________CAD_NUM_L1__________, __________BLANK__________,
+      __________CAD_NUM_L2__________, __________BLANK__________,
+      __________CAD_NUM_L3__________, __________BLANK__________,
+      __________CAD_NUM_L4__________, _______, _______, _______),
 
   [_LAYER_SEL] = LAYOUT_wrapper(
       __________LAYER_SEL_L1__________, __________BLANK__________,
