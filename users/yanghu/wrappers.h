@@ -9,7 +9,7 @@
 // clang-format off
 // qwerty letters.
 #define __________QWERTY_L1__________       KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
-#define __________QWERTY_L2__________       HY_S_CAPS, HOME_A,  KC_S,  HOME_D,    HOME_F,  KC_G
+#define __________QWERTY_L2__________       HY_S_CAPS,HOME_A,  HOME_S,  KC_D,    HOME_F,  KC_G
 #define __________QWERTY_L3__________       KC_LALT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
 
 #define __________QWERTY_R1__________       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC
