@@ -51,6 +51,15 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case OSL(_CAD_NUM):
+        case TT(_CAD_NUM):
+            return false;
+        default:
+            return true;
+    }
+}
 
 // Tap dance
 qk_tap_dance_action_t tap_dance_actions[] = {

@@ -45,7 +45,19 @@ void oled_render_layer(void) {
   } else if (IS_LAYER_ON(_BASE)){
     oled_write_P(qmk_logo, false);
   } else {
-    oled_write_ln(" ", false);
+    if (IS_LAYER_ON(_LAYER_SEL)) {
+      oled_write_ln("SEL", false);
+    } else if (IS_LAYER_ON(_CAD_NUM)) {
+      oled_write_ln("CAD.N", false);
+    } else if (IS_LAYER_ON(_CAD)) {
+      oled_write_ln("CAD", false);
+    } else if (IS_LAYER_ON(_FUNC)){
+      oled_write_ln("FUNC", false);
+    } else if (IS_LAYER_ON(_DEBUG_LAYER)){
+      oled_write_ln("DEBUG", false);
+    } else {
+      oled_write_ln("?????", false);
+    }
     oled_write_ln(" ", false);
     oled_write_ln(" ", false);
     oled_write_ln(" ", false);
