@@ -10,9 +10,16 @@
 #define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
 #define NUM_ALT LM(_NUMPAD, MOD_LALT)
 #define SFT_SPACE LSFT_T(KC_SPACE)
+#define SFT_BSPC LSFT_T(KC_BSPC)
 #define SYM_ENT LT(_SYMBOL, KC_ENT)
 #define NAV_ENT LT(_NAV, KC_ENT)
 #define SYM_LEFT LT(_SYMBOL, KC_LEFT)
+
+// Oneshot keys
+#define OS_CTRL OSM(MOD_LCTL)
+#define OS_SHFT OSM(MOD_LSFT)
+#define OS_ALT OSM(MOD_LALT)
+#define OS_GUI OSM(MOD_LGUI)
 
 #define HY_S_CAPS TD(TD_S_CAPS)
 
@@ -25,4 +32,5 @@ enum tap_dance_codes {
 enum cusom_keys {
   ENC_SWITCH = SAFE_RANGE,
   NAV_TAB,
+  KC_ATAB,
 };

@@ -51,7 +51,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         retval = true;
       } // case kc_bspc
       break;
-    case NAV_ENT:
+    case MO(_SYMBOL):
       // When releasing nav ent and alt key was registered, unregister it.
       if (!record->event.pressed && altkey_registered) {
         unregister_mods(MOD_BIT(KC_LALT));
@@ -59,7 +59,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       retval = true;
       break;
-    case NAV_TAB:
+    case KC_ATAB:
       if (record->event.pressed) {
         // first register alt if not already
         if (!altkey_registered) {

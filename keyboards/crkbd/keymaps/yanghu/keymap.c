@@ -35,13 +35,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-        NUM_ALT, MO(_SYMBOL), NAV_ENT, KC_BSPC, SFT_SPACE, KC_LGUI),
+        OS_CTRL, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, OS_CTRL),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
-      _______, _______, _______, _______,  KC_0,  KC_LALT),
+      _______, _______, _______, _______,  KC_0, _______),
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_L1__________, __________NAV_R1__________,
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________NOKEY_________, __________NOKEY5_________, LALT(KC_PSCR),
       __________NOKEY_________, __________NOKEY5_________, KC_PSCR,
       __________BLANK__________, __________BLANK__________,
-      __________BLANK5__________, KC_LCTRL),
+      __________BLANK__________),
 };
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record){

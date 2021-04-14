@@ -34,8 +34,8 @@
 // |     |  |  |  `  |  \  |  ~  |     |----|     |  +  |  <  |  >  |  ?  |TO(LAYERS|
 // ------------------------------------------------------------------------------
 #define __________SYMBOL_L1__________       KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
-#define __________SYMBOL_L2__________       KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______
-#define __________SYMBOL_L3__________       _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, XXXXXXX
+#define __________SYMBOL_L2__________       KC_ATAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_SPACE)
+#define __________SYMBOL_L3__________       _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
 
 #define __________SYMBOL_R1__________       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______
 #define __________SYMBOL_R2__________       C(KC_CIRC), KC_MINS, KC_EQL,  KC_UNDS, KC_COLN, KC_DQUO
@@ -52,7 +52,7 @@
 #define __________NAV_R2__________       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX
 
 #define __________NUM_L1__________       KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5
-#define __________NUM_L2__________       _______, KC_TAB, KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX
+#define __________NUM_L2__________       OS_GUI, OS_CTRL, OS_SHFT, OS_ALT, XXXXXXX, XXXXXXX
 #define __________NUM_L3__________       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________NUM_R1__________       KC_6,    KC_7, KC_8,  KC_9,   KC_PPLS, _______

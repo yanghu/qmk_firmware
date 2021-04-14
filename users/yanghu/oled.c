@@ -64,6 +64,8 @@ void oled_render_layer(void) {
   }
 }
 
+uint8_t osmods;
+
 void oled_render_mods(void) {
   static const char PROGMEM ctrl[] = {
     0xb6, 0xb7, 10, 
@@ -101,7 +103,7 @@ void oled_render_mods(void) {
     };
   // Now check mod status and render.
   static uint8_t mods;
-  mods = get_mods();
+  mods = get_mods() | osmods;
   if ((mods & MOD_MASK_CTRL) && (mods & MOD_MASK_ALT) && (mods & MOD_MASK_SHIFT)) {
     oled_write_P(c_a_shift, false);
   } else if ((mods & MOD_MASK_CTRL) && (mods & MOD_MASK_ALT)) {
@@ -142,3 +144,8 @@ void oled_render_capslock(bool caps_on) {
     }
   }
 }
+
+void oneshot_mods_changed_user(uint8_t mods) {
+  osmods = mods;
+}
+

@@ -6,15 +6,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SFT_SPACE:
       return TAPPING_TERM - 20;
-    case HOME_S:
     case HOME_F:
       return TAPPING_TERM - 40;
+    case HOME_S:
     case HOME_D:
-      return TAPPING_TERM - 45;
-    case SYM_LEFT:
-      return TAPPING_TERM - 70;
     case HOME_A:
-      return TAPPING_TERM + 10;
+		case SFT_BSPC:
+      return TAPPING_TERM + 50;
     default:
       return TAPPING_TERM;
   }
@@ -44,8 +42,8 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case SFT_T(KC_SPC):
-      return true;
+    case SFT_BSPC:
+      return false;
     default:
       return true;
   }
