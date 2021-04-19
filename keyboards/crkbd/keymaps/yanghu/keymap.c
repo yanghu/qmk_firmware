@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-        OS_CTRL, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, OS_CTRL),
+        KC_LALT, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LCTRL),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT_wrapper(
       __________NAV_L1__________, __________NAV_R1__________,
       __________NAV_L2__________, __________NAV_R2__________, 
-      _______, __________NOKEY5_________, __________NOKEY5_________, _______,
+      _______, __________NOKEY5__________, __________NOKEY5__________, _______,
       __________BLANK__________),
 
   [_NUMPAD] = LAYOUT_wrapper(
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FUNC] = LAYOUT_wrapper(
       __________FUNC_L1__________, __________FUNC_R1__________,
       __________FUNC_L2__________, __________BLANK__________,
-      __________BLANK__________, __________BLANK__________,
+      __________FUNC_L3__________, __________FUNC_R3__________,
       __________BLANK__________),
 
   [_CAD] = LAYOUT_wrapper(
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LAYER_SEL] = LAYOUT_wrapper(
       __________LAYER_SEL_L1__________, __________BLANK__________,
-      __________BLANK__________, __________BLANK__________,
+      __________LAYER_SEL_L2__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________),
 
@@ -86,8 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________BLANK__________),
 
   [_PSCR] = LAYOUT_wrapper(
-      __________NOKEY_________, __________NOKEY5_________, LALT(KC_PSCR),
-      __________NOKEY_________, __________NOKEY5_________, KC_PSCR,
+      __________NOKEY__________, __________NOKEY5__________, LALT(KC_PSCR),
+      __________NOKEY__________, __________NOKEY5__________, KC_PSCR,
       __________BLANK__________, __________BLANK__________,
       __________BLANK__________),
 };

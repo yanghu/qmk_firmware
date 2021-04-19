@@ -38,6 +38,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // still work even after having tapped the Backspace/Delete key.
             set_mods(mod_state);
             retval = false;
+          } else {
+            retval = true;
           }
         } else { // on release of KC_BSPC
           // In case KC_DEL is still being sent even after the release of KC_BSPC
@@ -45,10 +47,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(KC_DEL);
             delkey_registered = false;
             retval = false;
+          } else {
+            retval = true;
           }
         }
-        // Let QMK process the KC_BSPC keycode as usual outside of shift
-        retval = true;
       } // case kc_bspc
       break;
     case MO(_SYMBOL):

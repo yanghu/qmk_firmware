@@ -28,6 +28,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case HOME_S:
     case NAV_ENT:
     case SFT_SPACE:
+    case SFT_BSPC:
       return true;
     default:
       return false;
