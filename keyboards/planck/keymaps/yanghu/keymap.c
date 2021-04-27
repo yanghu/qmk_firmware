@@ -19,6 +19,7 @@
 
 #include "action_layer.h"
 #include "config.h"
+#include "keycode.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
 #include "users/yanghu/layers.h"
@@ -33,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-      ENC_SWITCH,    KC_LGUI, KC_LALT, NUM_ALT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LSFT, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   SYM_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
