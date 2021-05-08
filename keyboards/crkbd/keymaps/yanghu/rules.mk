@@ -1,4 +1,5 @@
 #SRC += muse.c
 USER_NAME := yanghu
 OLED_DRIVER_ENABLE  = yes
+SWAP_HANDS_ENABLE = yes
 # CONSOLE_ENABLE = yes
