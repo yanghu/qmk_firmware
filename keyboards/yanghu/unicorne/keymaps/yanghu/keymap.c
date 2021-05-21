@@ -3,6 +3,7 @@
 #include "keycode.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
+#include "rgblight_list.h"
 #include "users/yanghu/layers.h"
 #include "users/yanghu/wrappers.h"
 #include "yanghu.h"
@@ -127,9 +128,17 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else {  // index = 1: right encoder
         if (clockwise) {
+#ifdef RGB_MATRIX_ENABLE
+            rgb_matrix_step();
+#else
             rgblight_increase_hue_noeeprom();
+#endif
         } else {
+#ifdef RGB_MATRIX_ENABLE
+            rgb_matrix_step_reverse();
+#else
             rgblight_decrease_hue_noeeprom();
+#endif
         }
     }
 }
@@ -169,3 +178,5 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
 #endif
+
+void keyboard_post_init_user(void) { rgblight_sethsv(HSV_BLUE); }

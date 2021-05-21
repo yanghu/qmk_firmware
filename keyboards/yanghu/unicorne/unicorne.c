@@ -50,10 +50,11 @@ void i2c_init(void) {
 // clang-format off
 led_config_t g_led_config = {{
     // Key Matrix to LED Index
-    {2, NO_LED, NO_LED, NO_LED, 3, NO_LED, NO_LED, 4, NO_LED, NO_LED, NO_LED, 5},
-    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
-    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
-    {NO_LED, 1, NO_LED, NO_LED, 0, NO_LED, NO_LED, 7, NO_LED, NO_LED, 6, NO_LED},
+    // Since we only have 8 LEDs, map the keys near them to the same LED.
+    {2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5},
+    {2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5},
+    {1, 1, 1, 0, 0, 0, 7, 7, 7, 6, 6, 6},
+    {NO_LED, NO_LED, NO_LED, 0, 0, 0, 7, 7, 7, NO_LED, NO_LED, NO_LED},
 }, {// LED Index to Physical Position
   {94, 60},
   {18, 44},
