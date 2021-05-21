@@ -1,0 +1,2 @@
+USER_NAME := yanghu
+OLED_DRIVER_ENABLE = yes
