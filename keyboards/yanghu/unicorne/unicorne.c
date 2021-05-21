@@ -39,3 +39,33 @@ void i2c_init(void) {
 #endif
     }
 }
+
+// LED matrix
+// physical location
+// 2      3   4       5
+//
+// 1                  6
+//        0   7
+#ifdef RGB_MATRIX_ENABLE
+// clang-format off
+led_config_t g_led_config = {{
+    // Key Matrix to LED Index
+    {2, NO_LED, NO_LED, NO_LED, 3, NO_LED, NO_LED, 4, NO_LED, NO_LED, NO_LED, 5},
+    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+    {NO_LED, 1, NO_LED, NO_LED, 0, NO_LED, NO_LED, 7, NO_LED, NO_LED, 6, NO_LED},
+}, {// LED Index to Physical Position
+  {94, 60},
+  {18, 44},
+  {8, 10},
+  {94, 10},
+  {130,10},
+  {216, 10},
+  {208, 44},
+  {130, 60}
+}, {// LED Index to Flag
+  LED_FLAG_ALL, LED_FLAG_ALL, LED_FLAG_ALL, LED_FLAG_ALL, LED_FLAG_ALL, 
+  LED_FLAG_ALL, LED_FLAG_ALL, LED_FLAG_ALL
+}};
+// clang-format on
+#endif
