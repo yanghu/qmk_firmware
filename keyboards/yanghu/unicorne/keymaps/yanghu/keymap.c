@@ -91,38 +91,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-    switch (get_highest_layer(layer_state)) {
-        case _BASE:
-            if (clockwise) {
-                tap_code16(C(KC_RGHT));
-            } else {
-                tap_code16(C(KC_LEFT));
-            }
-            break;
-        case _ENC_SCROLL:
-            // Somehow my encoder direction is reversed
-            if (clockwise) {
+    if (index == 0) {
+        switch (get_highest_layer(layer_state)) {
+            case _BASE:
+                if (clockwise) {
+                    tap_code16(C(KC_RGHT));
+                } else {
+                    tap_code16(C(KC_LEFT));
+                }
+                break;
+            case _ENC_SCROLL:
+                // Somehow my encoder direction is reversed
+                if (clockwise) {
 #ifdef MOUSEKEY_ENABLE
-                tap_code(KC_MS_WH_DOWN);
+                    tap_code(KC_MS_WH_DOWN);
 #else
-                tap_code(KC_PGDN);
+                    tap_code(KC_PGDN);
 #endif
-            } else {
+                } else {
 #ifdef MOUSEKEY_ENABLE
-                tap_code(KC_MS_WH_UP);
+                    tap_code(KC_MS_WH_UP);
 #else
-                tap_code(KC_PGUP);
+                    tap_code(KC_PGUP);
 #endif
-            }
-            break;
-        case _ENC_VIM:
-            // Somehow my encoder direction is reversed
-            if (clockwise) {
-                tap_code16(C(KC_Y));
-            } else {
-                tap_code16(C(KC_E));
-            }
-            break;
+                }
+                break;
+            case _ENC_VIM:
+                // Somehow my encoder direction is reversed
+                if (clockwise) {
+                    tap_code16(C(KC_Y));
+                } else {
+                    tap_code16(C(KC_E));
+                }
+                break;
+        }
+    } else {  // index = 1: right encoder
+        if (clockwise) {
+            rgblight_increase_hue_noeeprom();
+        } else {
+            rgblight_decrease_hue_noeeprom();
+        }
     }
 }
 
