@@ -19,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
       ENC_SWITCH, KC_LSHIFT, MO(_SYMBOL), NAV_ENT, 
-      SFT_BSPC, KC_SPACE, KC_LCTRL, XXXXXXX),
+      SFT_BSPC, KC_SPACE, KC_LCTRL, ENC_SWITCH),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
@@ -125,20 +125,30 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code16(C(KC_E));
                 }
                 break;
-        }
+        }     // switch
     } else {  // index = 1: right encoder
-        if (clockwise) {
-#ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_step();
-#else
-            rgblight_increase_hue_noeeprom();
-#endif
-        } else {
-#ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_step_reverse();
-#else
-            rgblight_decrease_hue_noeeprom();
-#endif
+        switch (get_highest_layer(layer_state)) {
+            case _BASE:
+                if (clockwise) {
+                    rgblight_increase_hue_noeeprom();
+                } else {
+                    rgblight_decrease_hue_noeeprom();
+                }
+                break;
+            case _ENC_SCROLL:
+                if (clockwise) {
+                    rgblight_step();
+                } else {
+                    rgblight_step_reverse();
+                }
+                break;
+            case _ENC_VIM:
+                if (clockwise) {
+                    rgblight_increase_val();
+                } else {
+                    rgblight_decrease_val();
+                }
+                break;
         }
     }
 }
@@ -179,4 +189,46 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 #endif
 
-void keyboard_post_init_user(void) { rgblight_sethsv(HSV_BLUE); }
+#ifdef RGBLIGHT_LAYERS
+// RGB lightening
+
+const rgblight_segment_t PROGMEM base_layer[]       = RGBLIGHT_LAYER_SEGMENTS({0, 8, 0, 0, 0});
+const rgblight_segment_t PROGMEM adjust_layer[]     = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_RED});
+const rgblight_segment_t PROGMEM symbol_layer[]     = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_PURPLE});
+const rgblight_segment_t PROGMEM nav_layer[]        = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
+const rgblight_segment_t PROGMEM numpad_layer[]     = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
+const rgblight_segment_t PROGMEM capslock_layer[]   = RGBLIGHT_LAYER_SEGMENTS({6, 7, HSV_WHITE});
+const rgblight_segment_t PROGMEM enc_scroll_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_YELLOW});
+
+// Now define the array of layers. Later layers take precedence
+// clang-format off
+const rgblight_segment_t *const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    base_layer,
+    symbol_layer,
+    numpad_layer,
+    nav_layer,
+    enc_scroll_layer,
+    capslock_layer,
+    adjust_layer);
+// clang-format on
+
+layer_state_t layer_state_set_keymap(layer_state_t state) {
+    // Set RBG layer according to active keymap layer.
+    rgblight_set_layer_state(0, layer_state_cmp(state, _BASE));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _SYMBOL));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _NUMPAD));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _NAV));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _ENC_SCROLL));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _DEBUG_LAYER));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _ENC_VIM));
+    return state;
+}
+
+#endif
+
+void keyboard_post_init_user(void) {
+    rgblight_sethsv(HSV_BLUE);
+#ifdef RGBLIGHT_LAYERS
+    rgblight_layers = rgb_layers;
+#endif
+}

@@ -4,7 +4,7 @@
 bool led_update_user(led_t led_state) {
 #ifdef RGBLIGHT_ENABLE
 #    ifdef RGBLIGHT_LAYERS
-    rgblight_set_layer_state(4, led_state.caps_lock);
+    rgblight_set_layer_state(5, led_state.caps_lock);
 #    endif
 #endif
 #ifdef OLED_DRIVER_ENABLE
