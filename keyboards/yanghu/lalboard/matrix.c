@@ -50,15 +50,18 @@ static inline void setPinInputHigh_atomic(pin_t pin) {
     ATOMIC_BLOCK_FORCEON { setPinInputHigh(pin); }
 }
 
+static inline void setPinInputLow_atomic(pin_t pin) {
+    ATOMIC_BLOCK_FORCEON { setPinInputLow(pin); }
+}
 // matrix code
 
-static void select_row(uint8_t row) { writePinHigh(row_pins[row]); }
+static void select_row(uint8_t row) { setPinOutput_writeHigh(row_pins[row]); }
 
-static void unselect_row(uint8_t row) { writePinLow(row_pins[row]); }
+static void unselect_row(uint8_t row) { setPinInputLow_atomic(row_pins[row]); }
 
 static void unselect_rows(void) {
     for (uint8_t x = 0; x < ROWS_PER_HAND; x++) {
-        setPinOutput_writeLow(row_pins[x]);
+        setPinInputLow_atomic(row_pins[x]);
     }
 }
 
