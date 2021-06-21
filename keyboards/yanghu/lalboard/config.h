@@ -26,7 +26,7 @@
 #define PRODUCT lalboard
 
 /* key matrix size */
-#define MATRIX_ROWS 4
+#define MATRIX_ROWS 10
 #define MATRIX_COLS 5
 
 /*
@@ -35,7 +35,7 @@
 #define MATRIX_COL_PINS \
     { B1, B2, B3, B4, B5 }
 #define MATRIX_ROW_PINS \
-    { A10, A9 }
+    { A10, A9, A8, A7, A6 }
 
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
