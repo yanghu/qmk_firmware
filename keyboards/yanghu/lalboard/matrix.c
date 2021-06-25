@@ -28,9 +28,9 @@ uint8_t thisHand, thatHand;
 __attribute__((weak)) void matrix_slave_scan_user(void) {}
 
 /* delay between changing matrix pin state and reading values */
-void matrix_output_select_delay(void) { wait_us(15); }
+void matrix_output_select_delay(void) { wait_us(30); }
 
-void matrix_output_unselect_delay(void) { wait_us(100); }
+void matrix_output_unselect_delay(void) { wait_us(150); }
 
 static inline void setPinOutput_writeHigh(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
@@ -91,9 +91,10 @@ static bool read_cols_on_row(matrix_row_t current_matrix[], uint8_t current_row)
 
     // Unselect row
     unselect_row(current_row);
-    if (current_row + 1 < MATRIX_ROWS) {
-        matrix_output_unselect_delay();  // wait for row signal to go HIGH
-    }
+    matrix_output_unselect_delay();  // wait for row to turn off.
+    /* if (current_row + 1 < MATRIX_ROWS) { */
+    /*     matrix_output_unselect_delay();  // wait for row signal to go HIGH */
+    /* } */
 
     // If the row has changed, store the row and return the changed flag.
     if (current_matrix[current_row] != current_row_value) {
