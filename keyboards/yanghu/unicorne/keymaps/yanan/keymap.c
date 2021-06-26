@@ -19,6 +19,7 @@
 
 #include "action_layer.h"
 #include "config.h"
+#include "keycode.h"
 #include "keycodes.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
@@ -36,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-      ENC_SWITCH,  KC_LGUI, MO(_SYMBOL), NAV_ENT, 
+      KC_ESCAPE,  KC_LGUI, MO(_SYMBOL), NAV_ENT, 
       SFT_BSPC,   KC_SPACE, KC_LCTRL, ENC_SWITCH),
 
   [_SYMBOL] = LAYOUT_wrapper(
@@ -117,19 +118,19 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 // Space shift: immedage trigger shift: enter, tab.
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t* record) {
-    switch (keycode) {
-        case ENC_SWITCH:
-            if (record->event.pressed) {
-                // Toggle encoder layers based on current layer.
-                if (IS_LAYER_ON(_ENC_SCROLL)) {
-                    // Back to base if at vim layer.
-                    layer_off(_ENC_SCROLL);
-                } else {
-                    layer_on(_ENC_SCROLL);
-                }
-                return false;
-            }
-    }  // switch
+    /* switch (keycode) { */
+    /*     case ENC_SWITCH: */
+    /*         if (record->event.pressed) { */
+    /*             /1* // Toggle encoder layers based on current layer. *1/ */
+    /*             /1* if (IS_LAYER_ON(_ENC_SCROLL)) { *1/ */
+    /*             /1*     // Back to base if at vim layer. *1/ */
+    /*             /1*     layer_off(_ENC_SCROLL); *1/ */
+    /*             /1* } else { *1/ */
+    /*             /1*     layer_on(_ENC_SCROLL); *1/ */
+    /*             /1* } *1/ */
+    /*             /1* return false; *1/ */
+    /*         } */
+    /* }  // switch */
     return true;
 }
 
