@@ -30,8 +30,13 @@
 #define MATRIX_COLS 5
 
 /*
- * B2: South
- * B3: center (inverted)*/
+ * B1: East
+ * B2: North
+ * B3: center (inverted)
+ * B4: South
+ * B5: West
+ * */
+
 #define MATRIX_COL_PINS \
     { B1, B2, B3, B4, B5 }
 #define MATRIX_ROW_PINS \

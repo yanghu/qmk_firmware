@@ -14,21 +14,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "keycode.h"
 #include QMK_KEYBOARD_H
+
+enum layer {
+    _BASE,
+    _LOWER,
+    _UPPER,
+    _NAV,
+};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_lalboard(
-      KC_A, KC_B, KC_C, KC_D, KC_E,
-      KC_F, KC_G, KC_H, KC_I, KC_J,
-      KC_X, KC_G, KC_H, KC_I, KC_J,
-      KC_Y, KC_G, KC_H, KC_I, KC_J,
-      KC_Z, KC_G, KC_H, KC_I, KC_J,
-      KC_1, KC_2, KC_3, KC_4, KC_5, 
-      KC_6, KC_7, KC_8, KC_9, KC_0,
-      KC_U, KC_7, KC_8, KC_9, KC_0,
-      KC_V, KC_7, KC_8, KC_9, KC_0,
-      KC_W, KC_7, KC_8, KC_9, KC_0
+  [0] = LAYOUT_lalboard_alt(
+      // Down
+      KC_A, KC_O, KC_E, KC_U,  KC_H, KC_T, KC_N, KC_S,
+      // North
+      KC_SLASH, KC_COMMA, KC_DOT, KC_Q, KC_M, KC_W, KC_V, KC_Z,
+      KC_LPRN, KC_X, KC_Y, KC_I, KC_QUOTE, KC_GRAVE, XXXXXXX, KC_BSLASH,
+      KC_SCOLON, KC_P, KC_J, KC_K, KC_G, KC_C, KC_R, KC_L,
+      KC_DELETE, KC_ESC, XXXXXXX, KC_DQUO, KC_D, KC_F, KC_B, KC_RPRN,
+
+      /*     Inner, Down, Mode,  Upper-Out, Lower-Out,  */
+      /*LT*/ KC_ENTER, KC_LSHIFT, MO(_LOWER), KC_TAB, KC_LCTRL,
+      /*RT*/ KC_SPACE, MO(_UPPER), MO(_NAV), KC_BSPC, KC_LALT
   ),
 };
 // clang-format on

@@ -27,6 +27,8 @@
  * represents the switch matrix.
  */
 
+// Rows 0-4 are: thumb, fingers 1234
+// Columns 0-4 are: east, north, down, south, west
 // clang-format off
 #define LAYOUT_lalboard( \
     L00, L01, L02, L03, L04, \
@@ -51,6 +53,28 @@
     { R20, R21, R22, R23, R24 }, \
     { R30, R31, R32, R33, R34 }, \
     { R40, R41, R42, R43, R44 } \
+}
+
+#define LAYOUT_lalboard_alt( \
+    L1D, L2D, L3D, L4D, R1D, R2D, R3D, R4D, \
+    L1N, L2N, L3N, L4N, R1N, R2N, R3N, R4N, \
+    L1E, L2E, L3E, L4E, R1E, R2E, R3E, R4E, \
+    L1S, L2S, L3S, L4S, R1S, R2S, R3S, R4S, \
+    L1W, L2W, L3W, L4W, R1W, R2W, R3W, R4W, \
+    LTI, LTD, LTM, LTUO, LTLO, \
+    RTI, RTD, RTM, RTUO, RTRO  \
+) \
+{ \
+    { LTLO, LTUO, LTD, LTI, LTM}, \
+    { L4E, L4N, L4D, L4S, L4W }, \
+    { L3E, L3N, L3D, L3S, L3W }, \
+    { L2E, L2N, L2D, L2S, L2W }, \
+    { L1E, L1N, L1D, L1S, L1W }, \
+    { RTRO, RTUO, RTD, RTI, RTM}, \
+    { R1E, R1N, R1D, R1S, R1W }, \
+    { R2E, R2N, R2D, R2S, R2W }, \
+    { R3E, R3N, R3D, R3S, R3W }, \
+    { R4E, R4N, R4D, R4S, R4W } \
 }
 // clang-format on
 
