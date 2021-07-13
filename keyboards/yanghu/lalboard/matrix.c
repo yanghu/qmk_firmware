@@ -30,7 +30,7 @@ __attribute__((weak)) void matrix_slave_scan_user(void) {}
 /* delay between changing matrix pin state and reading values */
 void matrix_output_select_delay(void) { wait_us(30); }
 
-void matrix_output_unselect_delay(void) { wait_us(150); }
+void matrix_output_unselect_delay(void) { wait_us(200); }
 
 static inline void setPinOutput_writeHigh(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
