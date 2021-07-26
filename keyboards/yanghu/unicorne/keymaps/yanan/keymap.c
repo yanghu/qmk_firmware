@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
       KC_ESCAPE,  KC_LGUI, MO(_SYMBOL), NAV_ENT, 
-      SFT_BSPC,   KC_SPACE, KC_LCTRL, ENC_SWITCH),
+      KC_SPACE,   SFT_BSPC, KC_LCTRL, ENC_SWITCH),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
