@@ -6,6 +6,9 @@
 #define HOME_D LSFT_T(KC_D)
 #define HOME_F LT(_NUMPAD, KC_F)
 #define HOME_K LCTL_T(KC_K)
+#define HOME_O LSFT_T(KC_O)
+#define HOME_U LT(_NUMPAD, KC_U)
+#define HOME_T LCTL_T(KC_T)
 
 #define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
 #define NUM_ALT LM(_NUMPAD, MOD_LALT)
@@ -26,11 +29,11 @@
 #define ENC_TG TG(_ENC_SCROLL)
 
 enum tap_dance_codes {
-  TD_S_CAPS,
+    TD_S_CAPS,
 };
 
 enum cusom_keys {
-  ENC_SWITCH = SAFE_RANGE,
-  NAV_TAB,
-  KC_ATAB,
+    ENC_SWITCH = SAFE_RANGE,
+    NAV_TAB,
+    KC_ATAB,
 };

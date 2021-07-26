@@ -25,6 +25,25 @@
 #define __________QWERTY_R2__________       __________QWERTY_BASE_R2__________, KC_QUOT
 #define __________QWERTY_R3__________       __________QWERTY_BASE_R3__________, LT(_PSCR, KC_ENT)
 
+// Dvorak base
+
+#define __________DVORAK_BASE_L1__________       KC_SCLN, KC_COMMA, KC_DOT, KC_P,    KC_Y
+#define __________DVORAK_BASE_L2__________       HOME_A,  HOME_O,  KC_E,    HOME_U,  KC_I
+#define __________DVORAK_BASE_L3__________       KC_Z,    KC_Q,    KC_J,    KC_K,    KC_X
+
+#define __________DVORAK_BASE_R1__________       KC_F,    KC_G,    KC_C,    KC_R,    KC_L
+#define __________DVORAK_BASE_R2__________       KC_D,    KC_H,    HOME_T,  KC_N,    KC_S
+#define __________DVORAK_BASE_R3__________       KC_B,    KC_M,    KC_W,    KC_V,  KC_SLSH
+
+
+#define __________DVORAK_L1__________       KC_TAB,     __________DVORAK_BASE_L1__________
+#define __________DVORAK_L2__________       HY_S_CAPS,  __________DVORAK_BASE_L2__________
+#define __________DVORAK_L3__________       KC_LALT,    __________DVORAK_BASE_L3__________
+
+#define __________DVORAK_R1__________       __________DVORAK_BASE_R1__________, KC_BSPC
+#define __________DVORAK_R2__________       __________DVORAK_BASE_R2__________, KC_QUOT
+#define __________DVORAK_R3__________       __________DVORAK_BASE_R3__________, LT(_PSCR, KC_ENT)
+
 // Symbol
 // ______________________________________________________________________________
 // |  ~  |  !  |  @  |  #  |  $  |  %  |----|  ^  |  &  |  *  |  (  |  )  |     |
