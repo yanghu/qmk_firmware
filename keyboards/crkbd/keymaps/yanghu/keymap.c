@@ -26,15 +26,22 @@
 #include "yanghu.h"
 #include QMK_KEYBOARD_H
 
-#define LAYOUT_wrapper(...)            LAYOUT(__VA_ARGS__)
+#define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_wrapper(
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
+        KC_LSHIFT, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LCTRL),
+
+  [_DVORAK_BASE] = LAYOUT_wrapper(
+      __________DVORAK_L1__________, __________DVORAK_R1__________,
+      __________DVORAK_L2__________, __________DVORAK_R2__________,
+      __________DVORAK_L3__________, __________DVORAK_R3__________,
         KC_LSHIFT, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LCTRL),
 
   [_SYMBOL] = LAYOUT_wrapper(
@@ -92,54 +99,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________BLANK__________),
 };
 
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
-  switch (keycode) {
-  } // switch
-#ifdef OLED_DRIVER_ENABLE
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
-  }
-#endif
-  return true;
-}
+// clang-format on
 
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {}  // switch
+#ifdef OLED_DRIVER_ENABLE
+    if (record->event.pressed) {
+        set_keylog(keycode, record);
+    }
+#endif
+    return true;
+}
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  /* if (!is_master) { */
+    /* if (!is_master) { */
     /* return OLED_ROTATION_90;  // flips the display 180 degrees if offhand */
-  /* } */
-  return OLED_ROTATION_270;
+    /* } */
+    return OLED_ROTATION_270;
 }
-
 
 char keylog_str[24] = {};
 
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+const char code_to_name[60] = {' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\', '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
 
 void set_keylog(uint16_t keycode, keyrecord_t *record) {
-  char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-  if (keycode < 60) {
-    name = code_to_name[keycode];
-  }
+    char name = ' ';
+    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
+        keycode = keycode & 0xFF;
+    }
+    if (keycode < 60) {
+        name = code_to_name[keycode];
+    }
 
-  // update keylog
-  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-           record->event.key.row, record->event.key.col,
-           keycode, name);
+    // update keylog
+    snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c", record->event.key.row, record->event.key.col, keycode, name);
 }
 
-void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
-}
+void oled_render_keylog(void) { oled_write(keylog_str, false); }
 
 void render_bootmagic_status(bool status) {
     /* Show Ctrl-Gui Swap options */
@@ -158,11 +155,11 @@ void render_bootmagic_status(bool status) {
 
 void oled_task_user(void) {
     if (is_master) {
-      /* oled_render_layer_state(); */
-      /* oled_render_keylog(); */
-      oled_render_layer();
-      oled_render_mods();
+        /* oled_render_layer_state(); */
+        /* oled_render_keylog(); */
+        oled_render_layer();
+        oled_render_mods();
     }
 }
 
-#endif // OLED_DRIVER_ENABLE
+#endif  // OLED_DRIVER_ENABLE
