@@ -36,4 +36,5 @@ enum cusom_keys {
     ENC_SWITCH = SAFE_RANGE,
     NAV_TAB,
     KC_ATAB,
+    KC_GTAB,
 };

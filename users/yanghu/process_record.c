@@ -19,6 +19,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // Store the current modifier state in the variable for later reference
   mod_state = get_mods();
   static bool altkey_registered;
+  static bool guikey_registered;
   switch (keycode) {
     case KC_BSPC:
       {
@@ -59,6 +60,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_mods(MOD_BIT(KC_LALT));
         altkey_registered = false;
       }
+      if (!record->event.pressed && guikey_registered) {
+        unregister_mods(MOD_BIT(KC_LALT));
+        guikey_registered = false;
+      }
       retval = true;
       break;
     case KC_ATAB:
@@ -67,6 +72,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (!altkey_registered) {
           add_mods(MOD_BIT(KC_LALT));
           altkey_registered = true;
+        }
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      retval = false;
+      break;
+    case KC_GTAB:
+      if (record->event.pressed) {
+        // first register alt if not already
+        if (!guikey_registered) {
+          add_mods(MOD_BIT(KC_LGUI));
+          guikey_registered = true;
         }
         register_code(KC_TAB);
       } else {

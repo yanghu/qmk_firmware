@@ -18,8 +18,8 @@
 #define __________QWERTY_BASE_R3__________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
 
 #define __________QWERTY_L1__________       KC_TAB,     __________QWERTY_BASE_L1__________
-#define __________QWERTY_L2__________       HY_S_CAPS,  __________QWERTY_BASE_L2__________
-#define __________QWERTY_L3__________       KC_LALT,    __________QWERTY_BASE_L3__________
+#define __________QWERTY_L2__________       KC_LCTRL,  __________QWERTY_BASE_L2__________
+#define __________QWERTY_L3__________       HY_S_CAPS,    __________QWERTY_BASE_L3__________
 
 #define __________QWERTY_R1__________       __________QWERTY_BASE_R1__________, KC_BSPC
 #define __________QWERTY_R2__________       __________QWERTY_BASE_R2__________, KC_QUOT
@@ -69,12 +69,16 @@
 #define __________NAV_L2__________       XXXXXXX, XXXXXXX, KC_LSFT, KC_PGDN, KC_LCTL, XXXXXXX
 #define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
+#define __________NAV_MAC_L1__________       KC_TAB,  G(KC_1), G(KC_2), G(KC_3), G(KC_4), G(KC_5)
+#define __________NAV_MAC_L2__________       XXXXXXX, KC_LCTL, KC_LSFT, KC_LGUI, KC_LALT, XXXXXXX
+#define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+
 #define __________NAV_R1__________       KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______
 #define __________NAV_R2__________       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX
-#define __________NAV_R3__________       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define __________NAV_R3__________       XXXXXXX, KC_MINS, KC_EQL, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________NUM_L1__________       KC_ESC, KC_TAB,  KC_DEL, KC_1,  KC_2,    KC_3
-#define __________NUM_L2__________       OS_GUI, OS_CTRL, OS_SHFT, OS_ALT, XXXXXXX, XXXXXXX
+#define __________NUM_L2__________       OS_ALT, OS_CTRL, OS_SHFT, OS_GUI, XXXXXXX, XXXXXXX
 #define __________NUM_L3__________       _______,  KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, TO(_BASE)
 
 #define __________NUM_R1__________       KC_6,    KC_7, KC_8,  KC_9,   KC_PPLS, _______
