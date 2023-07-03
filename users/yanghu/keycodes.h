@@ -17,6 +17,7 @@
 #define SYM_ENT LT(_SYMBOL, KC_ENT)
 #define NAV_ENT LT(_NAV, KC_ENT)
 #define SYM_LEFT LT(_SYMBOL, KC_LEFT)
+#define OPT_LEFT LALT_T(KC_LEFT)
 
 // Oneshot keys
 #define OS_CTRL OSM(MOD_LCTL)
