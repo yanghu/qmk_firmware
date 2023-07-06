@@ -71,11 +71,10 @@
 
 #define __________NAV_L1__________       KC_TAB,  A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5)
 #define __________NAV_L2__________       XXXXXXX, XXXXXXX, KC_LSFT, KC_PGDN, KC_LCTL, XXXXXXX
-#define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU
 
 #define __________NAV_MAC_L1__________       KC_TAB,  G(KC_1), G(KC_2), G(KC_3), G(KC_4), G(KC_5)
 #define __________NAV_MAC_L2__________       XXXXXXX, KC_LCTL, KC_LSFT, KC_LGUI, KC_LALT, XXXXXXX
-#define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________NAV_R1__________       KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______
 #define __________NAV_R2__________       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX
