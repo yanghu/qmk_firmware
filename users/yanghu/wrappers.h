@@ -55,6 +55,7 @@
 #define __________SYMBOL_L1__________       KC_ATAB, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
 #define __________SYMBOL_L2__________       KC_ATAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_SPACE)
 #define __________SYMBOL_L3__________       DF(_BASE_MAC), KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
+
 #define __________SYMBOL_L1_MAC______       KC_GTILDE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
 #define __________SYMBOL_L2_MAC______       KC_GTAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_SPACE)
 #define __________SYMBOL_L3_MAC______       DF(_BASE), KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)

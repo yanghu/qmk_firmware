@@ -52,17 +52,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________SYMBOL_L1_MAC______,  __________SYMBOL_R1__________,
       __________SYMBOL_L2_MAC______,  __________SYMBOL_R2__________,
       __________SYMBOL_L3_MAC______,  __________SYMBOL_R3__________,
-      __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
+     _______, _______, _______, KC_LALT ,_______, S(KC_ENT), G(KC_SPACE) ,KC_LALT, _______, _______, _______),
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_MAC_L1__________, __________NAV_R1__________,
       __________NAV_MAC_L2__________, __________NAV_R2__________, 
       __________BLANK__________, __________NAV_R3__________,
-      __________BLANK__________, __________BLANK5__________),
+      __________BLANK__________, A(KC_SPACE) ,KC_LALT, _______, _______, _______),
 
   [_NUMPAD] = LAYOUT_wrapper(
       __________NUM_L1__________, __________NUM_R1__________,
-      KC_LALT, KC_LCTL, KC_LSFT, KC_LGUI, XXXXXXX, XXXXXXX, __________NUM_R2__________,
+      __________NUM_L2__________, __________NUM_R2__________,
       __________NUM_L3__________, __________NUM_R3__________,
       __________BLANK__________,  KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
