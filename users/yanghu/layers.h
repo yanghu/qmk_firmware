@@ -2,8 +2,10 @@
 
 enum planck_layers {
     _BASE,
+    _BASE_MAC,
     _DVORAK_BASE,
     _SYMBOL,
+    _SYMBOL_MAC,
     _NAV,
     _NUMPAD,
     _FUNC,

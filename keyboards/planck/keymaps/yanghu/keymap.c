@@ -34,12 +34,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-      ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE, OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+
+  [_BASE_MAC] = LAYOUT_wrapper(
+      __________QWERTY_L1__________, __________QWERTY_R1__________,
+      __________QWERTY_L2__________, __________QWERTY_R2__________,
+      __________QWERTY_L3__________, __________QWERTY_R3__________,
+      ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT, SFT_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
+      __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
+
+  [_SYMBOL_MAC] = LAYOUT_wrapper(
+      __________SYMBOL_L1_MAC______,  __________SYMBOL_R1__________,
+      __________SYMBOL_L2_MAC______,  __________SYMBOL_R2__________,
+      __________SYMBOL_L3_MAC______,  __________SYMBOL_R3__________,
       __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
 
   [_NAV] = LAYOUT_wrapper(
@@ -50,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMPAD] = LAYOUT_wrapper(
       __________NUM_L1__________, __________NUM_R1__________,
-      __________NUM_L2__________, __________NUM_R2__________,
+      KC_LALT, KC_LCTL, KC_LSFT, KC_LGUI, XXXXXXX, XXXXXXX, __________NUM_R2__________,
       __________NUM_L3__________, __________NUM_R3__________,
       __________BLANK__________,  KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
@@ -133,6 +145,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 // RGB lightening
 
 const rgblight_segment_t PROGMEM base_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, 0, 0, 0});
+const rgblight_segment_t PROGMEM mac_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
 const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_RED});
 const rgblight_segment_t PROGMEM nav_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
 const rgblight_segment_t PROGMEM numpad_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
@@ -146,7 +159,8 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
   nav_layer,
   enc_scroll_layer,
   capslock_layer,
-  adjust_layer
+  adjust_layer,
+  mac_layer
   );
 
 void keyboard_post_init_user(void) {
@@ -164,6 +178,8 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
   rgblight_set_layer_state(3, layer_state_cmp(state, _ENC_SCROLL));
   rgblight_set_layer_state(5, layer_state_cmp(state, _DEBUG_LAYER));
   rgblight_set_layer_state(5, layer_state_cmp(state, _ENC_VIM));
+  rgblight_set_layer_state(6, layer_state_cmp(state, _BASE_MAC));
+  rgblight_set_layer_state(6, layer_state_cmp(state, _SYMBOL_MAC));
   return state;
 }
 

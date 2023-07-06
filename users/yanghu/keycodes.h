@@ -38,4 +38,5 @@ enum cusom_keys {
     NAV_TAB,
     KC_ATAB,
     KC_GTAB,
+    KC_GTILDE,
 };

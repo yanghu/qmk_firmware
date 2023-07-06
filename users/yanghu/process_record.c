@@ -55,13 +55,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } // case kc_bspc
       break;
     case MO(_SYMBOL):
+    case MO(_SYMBOL_MAC):
       // When releasing nav ent and alt key was registered, unregister it.
       if (!record->event.pressed && altkey_registered) {
         unregister_mods(MOD_BIT(KC_LALT));
         altkey_registered = false;
       }
       if (!record->event.pressed && guikey_registered) {
-        unregister_mods(MOD_BIT(KC_LALT));
+        unregister_mods(MOD_BIT(KC_LGUI));
         guikey_registered = false;
       }
       retval = true;
@@ -89,6 +90,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(KC_TAB);
       } else {
         unregister_code(KC_TAB);
+      }
+      retval = false;
+      break;
+    case KC_GTILDE:
+      if (record->event.pressed) {
+        // first register alt if not already
+        if (!guikey_registered) {
+          add_mods(MOD_BIT(KC_LGUI | KC_LSHIFT));
+          guikey_registered = true;
+        }
+        register_code(KC_GRV);
+      } else {
+        unregister_mods(MOD_BIT(KC_LSHIFT));
+        unregister_code(KC_GRV);
       }
       retval = false;
       break;
