@@ -21,10 +21,13 @@
 #define __________QWERTY_L2__________       HY_S_CAPS,  __________QWERTY_BASE_L2__________
 #define __________QWERTY_L3__________       KC_LCTRL,    __________QWERTY_BASE_L3__________
 
+#define __________QWERTY_SIMPLE_L2__________       HY_S_CAPS,  KC_A, KC_S, KC_D, KC_F, KC_G
+
 #define __________QWERTY_R1__________       __________QWERTY_BASE_R1__________, KC_BSPC
 #define __________QWERTY_R2__________       __________QWERTY_BASE_R2__________, KC_QUOT
 #define __________QWERTY_R3__________       __________QWERTY_BASE_R3__________, LT(_PSCR, KC_ENT)
 
+#define __________QWERTY_SIMPLE_R2__________       KC_H,    KC_J,    KC_K,  KC_L,    KC_SCLN, KC_QUOT
 // Dvorak base
 
 #define __________DVORAK_BASE_L1__________       KC_SCLN, KC_COMMA, KC_DOT, KC_P,    KC_Y
@@ -52,15 +55,16 @@
 // ------------------------------------------------------------------------------
 // |     |  |  |  `  |  \  |  ~  | c-␣ |----|     |  +  |  <  |  >  |  ?  |TO(LAYERS|
 // ------------------------------------------------------------------------------
-#define __________SYMBOL_L1__________       KC_ATAB, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
+#define __________SYMBOL_L1__________       C(KC_W), KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
 #define __________SYMBOL_L2__________       KC_ATAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_SPACE)
-#define __________SYMBOL_L3__________       DF(_BASE_MAC), KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
+#define __________SYMBOL_L3__________       _______, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
 
-#define __________SYMBOL_L1_MAC______       KC_GTILDE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
-#define __________SYMBOL_L2_MAC______       KC_GTAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_SPACE)
-#define __________SYMBOL_L3_MAC______       DF(_BASE), KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
+#define __________SYMBOL_L1_MAC______       G(KC_W), KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
+#define __________SYMBOL_L2_MAC______       KC_GTAB,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, G(KC_T)
+#define __________SYMBOL_L3_MAC______       KC_GTILDE, KC_PIPE, KC_GRV, KC_BSLS, KC_TILD, C(KC_SPACE)
 
-#define __________SYMBOL_R1__________       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______
+#define __________SYMBOL_R1__________       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, C(KC_BSPC)
+#define __________SYMBOL_R1_MAC______       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, A(KC_BSPC)
 #define __________SYMBOL_R2__________       C(KC_CIRC), KC_MINS, KC_EQL,  KC_UNDS, KC_COLN, KC_DQUO
 #define __________SYMBOL_R3__________       XXXXXXX, KC_PLUS, KC_LT,   KC_GT,   KC_QUES, TO(_LAYER_SEL)
 
@@ -74,13 +78,13 @@
 #define __________NAV_L3__________       XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU
 
 #define __________NAV_MAC_L1__________       KC_TAB,  G(KC_1), G(KC_2), G(KC_3), G(KC_4), G(KC_5)
-#define __________NAV_MAC_L2__________       XXXXXXX, KC_LCTL, KC_LSFT, KC_LGUI, KC_LALT, XXXXXXX
+#define __________NAV_MAC_L2__________       XXXXXXX, KC_LCTL, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL
 
 #define __________NAV_R1__________       KC_HOME, KC_PGUP, KC_END, XXXXXXX, XXXXXXX, _______
 #define __________NAV_R2__________       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX
 #define __________NAV_R3__________       XXXXXXX, KC_MINS, KC_EQL, XXXXXXX, XXXXXXX, XXXXXXX
 
-#define __________NUM_L1__________       KC_ESC, KC_TAB,  KC_DEL, KC_1,  KC_2,    KC_3
+#define __________NUM_L1__________       KC_ESC, KC_TAB,  KC_DEL, C(A(KC_LGUI)),  KC_2,    KC_3
 #define __________NUM_L2__________       KC_LALT, KC_LCTL, KC_LSHIFT, KC_LGUI, XXXXXXX, XXXXXXX
 #define __________NUM_L3__________       _______,  KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, TO(_BASE)
 

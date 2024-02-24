@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-      ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE, OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      DF(_BASE_SIMPLE),    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE, OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
   [_BASE_MAC] = LAYOUT_wrapper(
       __________QWERTY_L1__________, __________QWERTY_R1__________,
@@ -42,35 +42,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L3__________, __________QWERTY_R3__________,
       ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT, SFT_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
+  [_BASE_SIMPLE] = LAYOUT_wrapper(
+      __________QWERTY_L1__________, __________QWERTY_R1__________,
+      __________QWERTY_SIMPLE_L2__________, __________QWERTY_SIMPLE_R2__________,
+      __________QWERTY_L3__________, __________QWERTY_R3__________,
+      DF(_BASE),    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT, KC_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
-      __________BLANK5__________, S(KC_ENT),KC_0      ,KC_LALT, _______, _______, _______),
+      _______, DF(_BASE_MAC), _______, _______, _______,  _______,KC_0      ,KC_LALT, _______, _______, _______),
 
   [_SYMBOL_MAC] = LAYOUT_wrapper(
-      __________SYMBOL_L1_MAC______,  __________SYMBOL_R1__________,
+      __________SYMBOL_L1_MAC______,  __________SYMBOL_R1_MAC______,
       __________SYMBOL_L2_MAC______,  __________SYMBOL_R2__________,
       __________SYMBOL_L3_MAC______,  __________SYMBOL_R3__________,
-     _______, _______, _______, KC_LALT ,_______, S(KC_ENT), G(KC_SPACE) ,KC_LALT, _______, _______, _______),
+     _______, DF(_BASE), _______, KC_LALT ,_______, _______, G(KC_SPACE) ,KC_LALT, _______, _______, _______),
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_MAC_L1__________, __________NAV_R1__________,
       __________NAV_MAC_L2__________, __________NAV_R2__________, 
       __________BLANK__________, __________NAV_R3__________,
-      __________BLANK__________, A(KC_SPACE) ,KC_LALT, _______, _______, _______),
+      _______, _______,_______, _______, G(KC_LALT), _______, KC_LSHIFT, KC_LALT, _______, _______, _______),
 
   [_NUMPAD] = LAYOUT_wrapper(
       __________NUM_L1__________, __________NUM_R1__________,
       __________NUM_L2__________, __________NUM_R2__________,
       __________NUM_L3__________, __________NUM_R3__________,
-      __________BLANK__________,  KC_P0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
+      __________BLANK__________,  KC_0, KC_P0, KC_DOT, KC_PENT, KC_PENT),
 
   [_FUNC] = LAYOUT_wrapper(
       __________FUNC_L1__________, __________FUNC_R1__________,
       __________FUNC_L2__________, __________BLANK__________,
       __________BLANK__________, __________BLANK__________,
-      __________BLANK__________ ,_______         , KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
+      __________BLANK__________ ,RESET, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY),
 
   [_LAYER_SEL] = LAYOUT_wrapper(
       __________LAYER_SEL_L1__________, __________BLANK__________,

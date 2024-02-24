@@ -3,7 +3,9 @@
 enum planck_layers {
     _BASE,
     _BASE_MAC,
+    _BASE_SIMPLE,
     _DVORAK_BASE,
+    _GAME,
     _SYMBOL,
     _SYMBOL_MAC,
     _NAV,
