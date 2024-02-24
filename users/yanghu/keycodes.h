@@ -10,6 +10,7 @@
 #define HOME_U LT(_NUMPAD, KC_U)
 #define HOME_T LCTL_T(KC_T)
 
+#define CTL_ESC LCTL_T(KC_ESC)
 #define NUM_CTRL LM(_NUMPAD, MOD_LCTL)
 #define NUM_ALT LM(_NUMPAD, MOD_LALT)
 #define SFT_SPACE LSFT_T(KC_SPACE)
