@@ -112,10 +112,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void encoder_update_user(uint8_t index, bool clockwise) {
   switch(get_highest_layer(layer_state)){
     case _BASE:
+    case _BASE_MAC:
+    case _BASE_SIMPLE:
       if (clockwise) {
-        tap_code16(C(KC_RGHT));
+        /* tap_code16(C(KC_RGHT)); */
+        tap_code(KC_VOLU)
       } else {
-        tap_code16(C(KC_LEFT));
+        tap_code(KC_VOLD)
+        /* tap_code16(C(KC_LEFT)); */
       }
       break;
     case _ENC_SCROLL:
