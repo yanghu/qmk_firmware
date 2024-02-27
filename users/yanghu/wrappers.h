@@ -47,6 +47,17 @@
 #define __________DVORAK_R2__________       __________DVORAK_BASE_R2__________, KC_QUOT
 #define __________DVORAK_R3__________       __________DVORAK_BASE_R3__________, LT(_PSCR, KC_ENT)
 
+
+// Game
+#define __________GAME_L1__________       KC_TAB, KC_Q,    KC_W,    KC_E,    KC_R,   KC_F5
+#define __________GAME_L2__________       KC_LCTRL, KC_A,  KC_S,  KC_D,    KC_F,  KC_G
+#define __________GAME_L3__________       KC_LSHIFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
+
+#define __________GAME_R1__________       KC_F6,    KC_F7,    KC_F8,    KC_O,    KC_P, KC_DEL
+#define __________GAME_R2__________       KC_H,    KC_J,    KC_K,  KC_L,    KC_SCLN, KC_QUOT
+#define __________GAME_R3__________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT
+
+
 // Symbol
 // ______________________________________________________________________________
 // |  ~  |  !  |  @  |  #  |  $  |  %  |----|  ^  |  &  |  *  |  (  |  )  |     |

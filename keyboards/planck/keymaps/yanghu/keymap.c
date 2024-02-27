@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-      DF(_BASE_SIMPLE),    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE, OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+      DF(_GAME),    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_SPACE, OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
   [_BASE_MAC] = LAYOUT_wrapper(
       __________QWERTY_L1__________, __________QWERTY_R1__________,
@@ -42,11 +42,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L3__________, __________QWERTY_R3__________,
       ENC_SWITCH,    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT, SFT_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
 
+  [_GAME] = LAYOUT_wrapper(
+      __________GAME_L1__________, __________GAME_R1__________,
+      __________GAME_L2__________, __________GAME_R2__________,
+      __________GAME_L3__________, __________GAME_R3__________,
+      DF(_BASE),  KC_1, KC_2, KC_3, KC_4, KC_5, KC_SPACE, KC_LEFT, KC_DOWN, KC_UP,  KC_RIGHT),
+
   [_BASE_SIMPLE] = LAYOUT_wrapper(
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_SIMPLE_L2__________, __________QWERTY_SIMPLE_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
       DF(_BASE),    KC_LGUI, KC_LALT, KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT, KC_SPACE,   OPT_LEFT, KC_DOWN, KC_UP,   LT(_PSCR, KC_RGHT)),
+
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
