@@ -117,6 +117,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void encoder_update_user(uint8_t index, bool clockwise) {
+      if (clockwise) {
+        /* tap_code16(C(KC_RGHT)); */
+        tap_code_delay(KC_VOLU, 10);
+      } else {
+        tap_code_delay(KC_VOLD, 10);
+        /* tap_code16(C(KC_LEFT)); */
+      }
+      return;
+
   switch(get_highest_layer(layer_state)){
     case _BASE:
     case _BASE_MAC:
@@ -124,9 +133,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     case _GAME:
       if (clockwise) {
         /* tap_code16(C(KC_RGHT)); */
-        tap_code(KC_VOLU)
+        tap_code16(KC_VOLU);
       } else {
-        tap_code(KC_VOLD)
+        tap_code16(KC_VOLD);
         /* tap_code16(C(KC_LEFT)); */
       }
       break;
