@@ -103,7 +103,7 @@
 #define __________NUM_R2__________       XXXXXXX, KC_4, KC_5,  KC_6,   KC_PMNS, KC_PAST
 #define __________NUM_R3__________       XXXXXXX, KC_1, KC_2,  KC_3,   KC_PSLS, KC_PEQL
 
-#define __________FUNC_L1__________      RESET, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
+#define __________FUNC_L1__________      QK_BOOT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
 #define __________FUNC_L2__________      KC_LCTL, KC_F11, KC_F12, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________FUNC_L3__________      TO(_LAYER_SEL), _______, _______, _______, DF(_BASE), DF(_DVORAK_BASE) 
 #define __________FUNC_R1__________      KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  TO(_DEBUG_LAYER)
