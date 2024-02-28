@@ -97,12 +97,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         // first register alt if not already
         if (!guikey_registered) {
-          add_mods(MOD_BIT(KC_LGUI | KC_LSHIFT));
+          add_mods(MOD_BIT(KC_LGUI | KC_LSFT));
           guikey_registered = true;
         }
         register_code(KC_GRV);
       } else {
-        unregister_mods(MOD_BIT(KC_LSHIFT));
+        unregister_mods(MOD_BIT(KC_LSFT));
         unregister_code(KC_GRV);
       }
       retval = false;

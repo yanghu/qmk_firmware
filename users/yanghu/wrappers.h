@@ -50,8 +50,8 @@
 
 // Game
 #define __________GAME_L1__________       KC_TAB, KC_Q,    KC_W,    KC_E,    KC_R,   KC_F5
-#define __________GAME_L2__________       KC_LCTRL, KC_A,  KC_S,  KC_D,    KC_F,  KC_G
-#define __________GAME_L3__________       KC_LSHIFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
+#define __________GAME_L2__________       KC_LCTL, KC_A,  KC_S,  KC_D,    KC_F,  KC_G
+#define __________GAME_L3__________       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
 
 #define __________GAME_R1__________       KC_F6,    KC_F7,    KC_F8,    KC_O,    KC_P, KC_DEL
 #define __________GAME_R2__________       KC_H,    KC_J,    KC_K,  KC_L,    KC_SCLN, KC_QUOT
@@ -96,7 +96,7 @@
 #define __________NAV_R3__________       XXXXXXX, KC_MINS, KC_EQL, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________NUM_L1__________       KC_ESC, KC_TAB,  KC_DEL, C(A(KC_LGUI)),  KC_2,    KC_3
-#define __________NUM_L2__________       KC_LALT, KC_LCTL, KC_LSHIFT, KC_LGUI, XXXXXXX, XXXXXXX
+#define __________NUM_L2__________       KC_LALT, KC_LCTL, KC_LSFT, KC_LGUI, XXXXXXX, XXXXXXX
 #define __________NUM_L3__________       _______,  KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, TO(_BASE)
 
 #define __________NUM_R1__________       KC_6,    KC_7, KC_8,  KC_9,   KC_PPLS, _______
@@ -104,12 +104,12 @@
 #define __________NUM_R3__________       XXXXXXX, KC_1, KC_2,  KC_3,   KC_PSLS, KC_PEQL
 
 #define __________FUNC_L1__________      RESET, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
-#define __________FUNC_L2__________      KC_LCTRL, KC_F11, KC_F12, XXXXXXX, XXXXXXX, XXXXXXX
+#define __________FUNC_L2__________      KC_LCTL, KC_F11, KC_F12, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________FUNC_L3__________      TO(_LAYER_SEL), _______, _______, _______, DF(_BASE), DF(_DVORAK_BASE) 
 #define __________FUNC_R1__________      KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  TO(_DEBUG_LAYER)
 #define __________FUNC_R3__________      __________BLANK5__________ , TO(_LAYER_SEL)
 
-#define __________DEBUG_L1__________      TO(_BASE), DEBUG, _______, _______, _______, _______
+#define __________DEBUG_L1__________      TO(_BASE), DB_TOGG, _______, _______, _______, _______
 
 #define __________LAYER_SEL_L1__________  TO(_BASE), TO(_CAD), _______, _______, _______, _______
 #define __________LAYER_SEL_L2__________  _______, _______, _______, _______, TO(_NUMPAD), _______

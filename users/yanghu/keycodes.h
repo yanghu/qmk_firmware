@@ -1,4 +1,7 @@
 #pragma once
+#include "quantum.h"
+#include "quantum_keycodes.h"
+#include "quantum/quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 
 #define HOME_A LCTL_T(KC_A)
@@ -35,7 +38,7 @@ enum tap_dance_codes {
 };
 
 enum cusom_keys {
-    ENC_SWITCH = SAFE_RANGE,
+    ENC_SWITCH = 0x0FFF,
     NAV_TAB,
     KC_ATAB,
     KC_GTAB,

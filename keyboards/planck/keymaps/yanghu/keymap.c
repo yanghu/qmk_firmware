@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________NAV_MAC_L1__________, __________NAV_R1__________,
       __________NAV_MAC_L2__________, __________NAV_R2__________, 
       __________BLANK__________, __________NAV_R3__________,
-      _______, _______,_______, _______, G(KC_LALT), _______, KC_LSHIFT, KC_LALT, _______, _______, _______),
+      _______, _______,_______, _______, G(KC_LALT), _______, KC_LSFT, KC_LALT, _______, _______, _______),
 
   [_NUMPAD] = LAYOUT_wrapper(
       __________NUM_L1__________, __________NUM_R1__________,
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ENC_SWITCH, __________BLANK5__________, __________BLANK5__________)
 };
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
       if (clockwise) {
         /* tap_code16(C(KC_RGHT)); */
         tap_code_delay(KC_VOLU, 10);
@@ -125,7 +125,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         tap_code_delay(KC_VOLD, 10);
         /* tap_code16(C(KC_LEFT)); */
       }
-      return;
+      return false;
 
   switch(get_highest_layer(layer_state)){
     case _BASE:
@@ -200,6 +200,8 @@ void keyboard_post_init_user(void) {
   switch(os) {
     case OS_MACOS:
       layer_move(_BASE_MAC);
+    default:
+      ;
   }
 
 }

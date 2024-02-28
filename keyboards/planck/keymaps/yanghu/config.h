@@ -1,6 +1,7 @@
 #pragma once
 #define ENCODER_DIRECTION_FLIP
 #define RGBLIGHT_LAYERS
+#define LAYER_STATE_32BIT
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PLANCK_SOUND)

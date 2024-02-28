@@ -7,7 +7,8 @@
 
 //#define PERMISSIVE_HOLD
 //#define IGNORE_MOD_TAP_INTERRUPT
-#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+// #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 #define TAPPING_TERM 190
 #define TAPPING_TERM_PER_KEY
@@ -16,9 +17,9 @@
 
 #define TAPPING_TOGGLE 5
 
-#define COMBO_COUNT 3
+// #define COMBO_COUNT 3
 
-#define COMBO_TERM 60
+// #define COMBO_TERM 60
 
 #define OLED_FONT_H "users/yanghu/glcdfont.c"
 

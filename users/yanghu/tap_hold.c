@@ -47,12 +47,12 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SFT_BSPC:
-            return false;
-        default:
             return true;
+        default:
+            return false;
     }
 }
 
@@ -67,6 +67,6 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
 }
 
 // Tap dance
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_S_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
 };
