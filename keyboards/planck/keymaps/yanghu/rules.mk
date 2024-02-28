@@ -6,3 +6,4 @@ COMBO_ENABLE = yes
 # for volume keys
 EXTRAKEY_ENABLE = yes
 # CONSOLE_ENABLE = yes
+OS_DETECTION_ENABLE = yes

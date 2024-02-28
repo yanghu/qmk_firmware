@@ -22,6 +22,7 @@
 #include "keycode.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
+#include "os_detection.h"
 #include "users/yanghu/layers.h"
 #include "users/yanghu/wrappers.h"
 #include "yanghu.h"
@@ -191,9 +192,16 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
   );
 
 void keyboard_post_init_user(void) {
-// Enable the LED layers
-rgblight_layers = rgb_layers;
-// rgblight_set_layer_state(0, true);
+  // Enable the LED layers
+  rgblight_layers = rgb_layers;
+  // rgblight_set_layer_state(0, true);
+  // Set default layer based on OS
+  os_variant_t os = detected_host_os();
+  switch(os) {
+    case OS_MACOS:
+      layer_move(_BASE_MAC);
+  }
+
 }
 
 
