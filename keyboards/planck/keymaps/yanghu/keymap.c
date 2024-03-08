@@ -247,3 +247,22 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
   } // switch
   return true;
 }
+
+// Combos
+
+// Combo:
+enum combo_events {
+  COMBO_ESC,
+  CV_TAB,
+  SD_SHIFT,
+};
+
+const uint16_t PROGMEM esc_combo[] = {KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+  [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
+  [CV_TAB] = COMBO(cv_combo, KC_TAB),
+  [SD_SHIFT] = COMBO(sd_combo, KC_LSFT),
+};
+
