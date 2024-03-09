@@ -23,5 +23,5 @@
 
 // #define COMBO_TERM 60
 
-#define OLED_FONT_H "users/yanghu/glcdfont.c"
+#define OLED_FONT_H "users/yanghu/glcdfont2.c"
 

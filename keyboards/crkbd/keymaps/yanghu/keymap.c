@@ -28,7 +28,6 @@
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
-void set_keylog(uint16_t keycode, keyrecord_t *record);
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -36,25 +35,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       __________QWERTY_L1__________, __________QWERTY_R1__________,
       __________QWERTY_L2__________, __________QWERTY_R2__________,
       __________QWERTY_L3__________, __________QWERTY_R3__________,
-        KC_LSHIFT, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LCTRL),
+        KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LGUI),
+
+  [_BASE_MAC] = LAYOUT_wrapper(
+      __________QWERTY_L1__________, __________QWERTY_R1__________,
+      __________QWERTY_L2__________, __________QWERTY_R2__________,
+      __________QWERTY_L3__________, __________QWERTY_R3__________,
+        KC_LGUI, MO(_SYMBOL_MAC), NAV_ENT_MAC, SFT_BSPC, KC_SPACE, KC_LGUI),
 
   [_DVORAK_BASE] = LAYOUT_wrapper(
       __________DVORAK_L1__________, __________DVORAK_R1__________,
       __________DVORAK_L2__________, __________DVORAK_R2__________,
       __________DVORAK_L3__________, __________DVORAK_R3__________,
-        KC_LSHIFT, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LCTRL),
+        KC_LGUI, MO(_SYMBOL), NAV_ENT, SFT_BSPC, KC_SPACE, KC_LGUI),
 
   [_SYMBOL] = LAYOUT_wrapper(
       __________SYMBOL_L1__________,  __________SYMBOL_R1__________,
       __________SYMBOL_L2__________,  __________SYMBOL_R2__________,
       __________SYMBOL_L3__________,  __________SYMBOL_R3__________,
-      _______, _______, _______, _______,  KC_0, _______),
+      DF(_BASE_MAC), _______, _______, _______,  KC_0, _______),
+
+  [_SYMBOL_MAC] = LAYOUT_wrapper(
+      __________SYMBOL_L1_MAC______,  __________SYMBOL_R1_MAC______,
+      __________SYMBOL_L2_MAC______,  __________SYMBOL_R2__________,
+      __________SYMBOL_L3_MAC______,  __________SYMBOL_R3__________,
+      DF(_BASE) ,_______, _______, _______, G(KC_SPACE) , KC_LGUI),
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_L1__________, __________NAV_R1__________,
       __________NAV_L2__________, __________NAV_R2__________, 
       _______, __________NOKEY5__________, __________NOKEY5__________, _______,
       __________BLANK__________),
+
+  [_NAV_MAC] = LAYOUT_wrapper(
+      __________NAV_MAC_L1__________, __________NAV_R1__________,
+      __________NAV_MAC_L2__________, __________NAV_R2__________, 
+      _______, __________NOKEY5__________, __________NOKEY5__________, _______,
+      _______, _______, _______, KC_LSFT, KC_LALT, _______),
 
   [_NUMPAD] = LAYOUT_wrapper(
       __________NUM_L1__________, __________NUM_R1__________,
@@ -102,16 +119,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {}  // switch
-#ifdef OLED_DRIVER_ENABLE
-    if (record->event.pressed) {
-        set_keylog(keycode, record);
-    }
-#endif
+    /* switch (keycode) {}  // switch */
+/* #ifdef OLED_ENABLE */
+    /* if (record->event.pressed) { */
+    /*     set_keylog(keycode, record); */
+    /* } */
+/* #endif */
     return true;
 }
 
-#ifdef OLED_DRIVER_ENABLE
+// combos
+
+// Combos
+
+// Combo:
+enum combo_events {
+  COMBO_ESC,
+  CV_TAB,
+  SD_SHIFT,
+};
+
+const uint16_t PROGMEM esc_combo[] = {KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+  [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
+  [CV_TAB] = COMBO(cv_combo, KC_TAB),
+  [SD_SHIFT] = COMBO(sd_combo, KC_LSFT),
+};
+
+
+#ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     /* if (!is_master) { */
     /* return OLED_ROTATION_90;  // flips the display 180 degrees if offhand */
@@ -119,47 +157,17 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
 
-char keylog_str[24] = {};
-
-const char code_to_name[60] = {' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\', '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void set_keylog(uint16_t keycode, keyrecord_t *record) {
-    char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
-        keycode = keycode & 0xFF;
-    }
-    if (keycode < 60) {
-        name = code_to_name[keycode];
-    }
-
-    // update keylog
-    snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c", record->event.key.row, record->event.key.col, keycode, name);
+bool oled_task_user(void) {
+  oled_render_layer();
+  oled_render_mods();
+  oled_render_os();
+  /* if (is_keyboard_master) { */
+  /*     /1* oled_render_layer_state(); *1/ */
+  /*     /1* oled_render_keylog(); *1/ */
+  /*     oled_render_layer(); */
+  /*     oled_render_mods(); */
+  /* } */
+  return false;
 }
 
-void oled_render_keylog(void) { oled_write(keylog_str, false); }
-
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
-}
-
-void oled_task_user(void) {
-    if (is_master) {
-        /* oled_render_layer_state(); */
-        /* oled_render_keylog(); */
-        oled_render_layer();
-        oled_render_mods();
-    }
-}
-
-#endif  // OLED_DRIVER_ENABLE
+#endif  // OLED_ENABLE

@@ -88,16 +88,15 @@ void oled_render_mods(void) {
     return;
 }
 
-// Call this from "led_update_user" and use `led_state.caps_lock` to check
-// the status of capslock.
-void oled_render_capslock(bool caps_on) {
-    static const char PROGMEM capslock_logo[] = {0x9c, 0x9d, 0x9e, 0x9f, 10, 0xbc, 0xbd, 0xbe, 0xbf, 10, 0xdc, 0xdd, 0xde, 0xdf, 10, 0};
-    if (caps_on) {
-        oled_write_P(capslock_logo, false);
-    } else {
-        for (int i = 0; i < 3; ++i) {
-            oled_write_ln(" ", false);
-        }
+void oled_render_os(void) {
+    static const char PROGMEM apple_logo[]     = {156,157,10,188,189,0};
+    static const char PROGMEM windows_logo[]    = {158,159,10,190,191,0};
+    if (IS_LAYER_ON(_BASE_MAC) 
+        | IS_LAYER_ON(_NAV_MAC)
+        | IS_LAYER_ON(_SYMBOL_MAC)){
+        oled_write_P(apple_logo, false);
+    } else if (IS_LAYER_ON(_BASE)){
+        oled_write_P(windows_logo, false);
     }
 }
 

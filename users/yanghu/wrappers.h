@@ -19,7 +19,7 @@
 
 #define __________QWERTY_L1__________       KC_TAB,     __________QWERTY_BASE_L1__________
 #define __________QWERTY_L2__________       HY_S_CAPS,  __________QWERTY_BASE_L2__________
-#define __________QWERTY_L3__________       KC_LSFT,    __________QWERTY_BASE_L3__________
+#define __________QWERTY_L3__________       KC_LALT,    __________QWERTY_BASE_L3__________
 
 #define __________QWERTY_SIMPLE_L2__________       HY_S_CAPS,  KC_A, KC_S, KC_D, KC_F, KC_G
 

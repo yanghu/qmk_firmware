@@ -9,6 +9,7 @@ enum planck_layers {
     _SYMBOL,
     _SYMBOL_MAC,
     _NAV,
+    _NAV_MAC,
     _NUMPAD,
     _FUNC,
     _LAYER_SEL,

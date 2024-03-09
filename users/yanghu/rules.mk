@@ -10,3 +10,6 @@ TAP_DANCE_ENABLE = yes
 ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
   SRC += oled.c
 endif
+ifeq ($(strip $(OLED_ENABLE)), yes)
+  SRC += oled.c
+endif

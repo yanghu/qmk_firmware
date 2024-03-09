@@ -20,6 +20,7 @@
 #define SFT_BSPC LSFT_T(KC_BSPC)
 #define SYM_ENT LT(_SYMBOL, KC_ENT)
 #define NAV_ENT LT(_NAV, KC_ENT)
+#define NAV_ENT_MAC LT(_NAV_MAC, KC_ENT)
 #define SYM_LEFT LT(_SYMBOL, KC_LEFT)
 #define OPT_LEFT LALT_T(KC_LEFT)
 

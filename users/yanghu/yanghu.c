@@ -7,8 +7,8 @@ bool led_update_user(led_t led_state) {
     rgblight_set_layer_state(5, led_state.caps_lock);
 #    endif
 #endif
-#ifdef OLED_DRIVER_ENABLE
-    oled_render_capslock(led_state.caps_lock);
-#endif
+/* #ifdef OLED_ENABLE */
+/*     oled_render_capslock(led_state.caps_lock); */
+/* #endif */
     return true;
 }
