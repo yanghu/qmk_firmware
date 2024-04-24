@@ -4,6 +4,7 @@ SRC += yanghu.c \
 
 #BOOTMAGIC_ENABLE = full
 TAP_DANCE_ENABLE = yes
+OS_DETECTION_ENABLE = yes
 # COMBO_ENABLE = yes
 #SWAP_HANDS_ENABLE = yes
 
