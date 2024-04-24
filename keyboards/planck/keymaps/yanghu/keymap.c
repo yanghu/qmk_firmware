@@ -20,6 +20,7 @@
 #include "action_layer.h"
 #include "config.h"
 #include "keycode.h"
+#include "keycodes.h"
 #include "quantum.h"
 #include "quantum_keycodes.h"
 #include "os_detection.h"
@@ -70,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT_wrapper(
       __________NAV_MAC_L1__________, __________NAV_R1__________,
-      __________NAV_MAC_L2__________, __________NAV_R2__________, 
+      __________NAV_MAC_L2__________, __________NAV_R2__________,
       __________BLANK__________, __________NAV_R3__________,
       _______, _______,_______, _______, G(KC_LALT), _______, KC_LSFT, KC_LALT, _______, _______, _______),
 
@@ -255,14 +256,20 @@ enum combo_events {
   COMBO_ESC,
   CV_TAB,
   SD_SHIFT,
+  LEFT_BRACKET,
+  RIGHT_BRACKET
 };
 
-const uint16_t PROGMEM esc_combo[] = {KC_M, KC_COMMA, COMBO_END};
+
+const uint16_t PROGMEM esc_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM lb_combo[] = {KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM rb_combo[] = {KC_DOT, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
+combo_t key_combos[] = {
   [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
   [CV_TAB] = COMBO(cv_combo, KC_TAB),
   [SD_SHIFT] = COMBO(sd_combo, KC_LSFT),
+  [LEFT_BRACKET] = COMBO(lb_combo, KC_LEFT_BRACKET),
+  [RIGHT_BRACKET] = COMBO(rb_combo, KC_RIGHT_BRACKET)
 };
-
