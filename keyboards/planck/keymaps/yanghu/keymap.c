@@ -254,6 +254,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
 // Combo:
 enum combo_events {
   COMBO_ESC,
+  COMBO_ESC_2,
   CV_TAB,
   SD_SHIFT,
   LEFT_BRACKET,
@@ -261,13 +262,15 @@ enum combo_events {
 };
 
 
-const uint16_t PROGMEM esc_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {KC_J, HOME_K, COMBO_END};
+const uint16_t PROGMEM esc_combo_2[] = {KC_C, KC_X, COMBO_END};
 const uint16_t PROGMEM lb_combo[] = {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM rb_combo[] = {KC_DOT, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
 combo_t key_combos[] = {
   [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
+  [COMBO_ESC_2] = COMBO(esc_combo_2, KC_ESC),
   [CV_TAB] = COMBO(cv_combo, KC_TAB),
   [SD_SHIFT] = COMBO(sd_combo, KC_LSFT),
   [LEFT_BRACKET] = COMBO(lb_combo, KC_LEFT_BRACKET),
